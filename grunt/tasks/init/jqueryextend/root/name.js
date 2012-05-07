@@ -1,4 +1,4 @@
-/* Author: {%= author_name %} {%= author_url %} {%= grunt.template.today('yyyy') %} */
+/* Author: {%= author_name %}, {%= author_url %}, {%= grunt.template.today('yyyy') %} */
 
 ;(function($) {
 

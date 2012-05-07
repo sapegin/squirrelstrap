@@ -6,7 +6,7 @@
  * @version 0.0.0
  * @requires jQuery
  * @author {%= author_name %}
- * @copyright {%= grunt.template.today('yyyy') %} {%= author_name %} {%= author_url %}
+ * @copyright {%= grunt.template.today('yyyy') %} {%= author_name %}, {%= author_url %}
  * @license MIT
  */
 
