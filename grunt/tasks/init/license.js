@@ -1,8 +1,8 @@
 /**
- * Extended HTML template for Grunt
+ * License template for Grunt
  */
 
-exports.description = 'Create a extended HTML5 file.';
+exports.description = 'Create license file.';
 exports.warnOn = 'License.md';
 
 // The actual init template.

@@ -1,8 +1,8 @@
 /**
- * Extended HTML template for Grunt
+ * Readme template for Grunt
  */
 
-exports.description = 'Create a extended HTML5 file.';
+exports.description = 'Create readme and license files.';
 exports.warnOn = ['Readme.md', 'License.md'];
 
 // The actual init template.
