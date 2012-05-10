@@ -4,6 +4,7 @@
 
 // Basic template description.
 exports.description = 'Create a CSS bootstrap directory.';
+exports.warnOn = 'css';
 
 // The actual init template.
 exports.template = function(grunt, init, done) {
@@ -12,17 +13,31 @@ exports.template = function(grunt, init, done) {
 			{
 				name: 'maxwidth',
 				message: 'Page max width',
-				default: '1000px',
-				warning: ''
+				default: '1000px'
 			},
 			{
 				name: 'footer',
 				message: 'Sticky footer height',
-				default: 'no sticky footer',
-				warning: ''
+				default: 'no sticky footer'
+			},
+			{
+				name: 'gridCols',
+				message: 'Grid: number of columns (or none)',
+				default: '12'
+			},
+			{
+				name: 'gridGutter',
+				message: 'Grid: gutter width (0—19)',
+				default: '5'
 			}
 		], function(err, props) {
 		grunt.utils._.defaults(props, init.defaults);
+
+		// Grid
+		if (props.gridCols) {
+			var anygrid = require('./_src/anygrid');
+			props.gridCss = anygrid.generate(props.gridCols, props.gridGutter);
+		}
 
 		// Files to copy (and process).
 		var files = init.filesToCopy(props);

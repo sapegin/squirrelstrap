@@ -1,4 +1,4 @@
-/* Author: {%= author_name %}, {%= author_url %}, {%= grunt.template.today('yyyy') %} */
+/* Squirrelstrap. © 2012 Artem Sapegin http://sapegin.me */
 
 /* Global reset */
 * {
@@ -65,3 +65,8 @@ pre { white-space:pre; white-space:pre-wrap; white-space:pre-line; word-wrap:bre
 
 /* Accessible focus: people.opera.com/patrickl/experiments/keyboard/test */
 a:hover, a:active { outline:0; }
+
+{% if (gridCss) { %}
+/* Grid: {%= gridCols %} columns {% if (gridCss) { %}with {%= gridGutter %}% gutter{% } else { %}without gutter{% } %}: http://anygrid.net */
+{%= gridCss %}
+{% } %}
