@@ -1,0 +1,127 @@
+/* Author: {%= author_name %}, {%= author_url %}, {%= grunt.template.today('yyyy') %} */
+
+// Traditional typographic scale
+// 8 9 11 12 13 15 16 19 22 24 28 32 48 64 80 96 pixels
+
+// Variables
+{% if (footer) { %}footer-height = {%= footer %}{% } %}
+
+
+body {
+	background:#fff;
+	color:#000;
+	line-height:1.4;
+	margin:0 auto;
+}
+{% if (maxwidth) { %}body, footer {
+	max-width:{%= maxwidth %};
+}{% } %}
+
+{% if (footer) { %}// Sticky footer
+.footer { height:footer-height; }
+body { padding-bottom:footer-height; }{% } %}
+
+/* Fonts
+
+Body:
+	font-family:"Hoefler Text", Cambria, Georgia, serif;
+
+Headings:
+	font-family:"Myriad Pro", "Trebuchet MS", Verdana, Geneva, sans-serif;
+	font-family:"Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif; ??? Not tested
+	font-family:Corbel, Verdana, Geneva, sans-serif;
+	font-family:Cochin, Constantia, Georgia, serif;
+
+Small:
+	font-family:Calibri, "Trebuchet MS", "Helvetica Neue", Tahoma, sans-serif;
+
+Monospace:
+	font-family:Consolas, "Lucida Console", Monaco, "Courier New", Courier, monospace;
+
+http://www.awayback.com/revised-font-stack/
+
+Corbel and Hoefler Text are good fonts for iPad (but it much smaller than Georgia -- you need to make font bigger by ~2px)
+
+*/
+
+* { font-family:Calibri, "Trebuchet MS", "Helvetica Neue", Tahoma, sans-serif; }
+
+// Paul Irish's Bulletproof @font-face syntax: http://mky.be/font-face/bulletproof/
+/*
+@font-face {
+	font-family:"Graublau Web";
+	src:url("GraublauWeb.eot");
+	src:local("☺"), url("GraublauWeb.woff") format("woff"), url("GraublauWeb.ttf") format("truetype");
+}
+*/
+
+
+// Links
+
+link-color = #1978c8;
+visited-color = #8c5ad2;
+hover-color = #1694ec;
+active-color = #fff  // Active navigation item
+{% if (linkDecor == 'border') { %}link-underline-color = hsla(link-color,.4);
+visited-underline-color = hsla(visited-color,.4);
+hover-underline-color = hsla(active-color,.4);{% } %}
+
+a {
+	{% if (linkDecor == 'border') { %}text-decoration:none;
+	border-bottom-width:1px;
+	border-bottom-style:solid;{% } else { %}
+	text-decoration:underline;{% } %}
+	transition:border .1s ease-in-out, color .2s ease-in-out, background .2s ease-in-out;
+}
+a.fake {
+	{% if (linkDecor == 'underline') { %}border-bottom-width:1px;{% } %}
+	border-bottom-style:dotted;
+}
+a:link, nav a:visited, a.fake:visited {
+	color:link-color;
+	{% if (linkDecor == 'border') { %}border-bottom-color:link-underline-color;{% } %}
+}
+a:visited {
+	color:visited-color;
+	{% if (linkDecor == 'border') { %}border-bottom-color:visited-underline-color;{% } %}
+}
+a:active {
+	position:relative;
+	top:1px;
+}
+a:hover, a:active, nav a:hover, nav a:active, a.fake:hover, a.fake:active {
+	color:hover-color;
+	{% if (linkDecor == 'border') { %}border-bottom-color:hover-underline-color;
+	border-bottom-width:2px;{% } %}
+}
+// Active navigation items
+.active, a.active:link, a.active:visited {
+	background:link-color;
+	color:active-color;
+	{% if (linkDecor == 'underline') { %}text-decoration:none;{% } else { %}
+	border-bottom:none;{% } %}
+}
+a.active:hover, a.active:active {
+	background:hover-color;
+}
+
+
+// Text selection
+text-selection(#000, #faedb1);
+
+// iOS tap highlighting: j.mp/webkit-tap-highlight-color
+a:link {
+	-webkit-tap-highlight-color:#ff5e99;
+}
+
+
+/* Helper Classes */
+
+// Text without line breaks
+.nobr { white-space:nowrap; }
+
+// Numbers with smaller spaces:1 000 000
+.number {
+	word-spacing:-0.25ex;
+	white-space:nowrap;
+}

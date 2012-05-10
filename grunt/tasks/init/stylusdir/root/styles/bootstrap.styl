@@ -1,0 +1,66 @@
+// Squirrelstrap. © 2012 Artem Sapegin http://sapegin.me
+
+// Global reset
+* {
+	padding:0;
+	margin:0;
+	box-sizing:border-box;
+}
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary { display:block; }
+sup, sub, small, code { line-height:0; }
+a img, a.img { border:none !important; }
+abbr { border-bottom:none; }
+ul { list-style:none; }
+table { border-collapse:collapse; border-spacing:0; }
+
+// Clear fix: nicolasgallagher.com/micro-clearfix-hack/
+.group:before, .group:after { content:""; display:table; }
+.group:after { clear:both; }
+.group { *zoom:1; }  // IE6-7
+
+// Force scrollbar in non IE
+html { overflow-y:scroll; }
+
+{% if (footer) { %}// Sticky footer
+html { min-height:100%; position:relative; }
+.footer { position:absolute; bottom:0; width:100%; }{% } %}
+
+// www.aestheticallyloyal.com/public/optimize-legibility/
+h1, h2, h3 { text-rendering:optimizeLegibility; }
+
+// maxvoltar.com/archive/-webkit-font-smoothing
+html { -webkit-font-smoothing:subpixel-antialiased; }  // antialiased|subpixel-antialiased
+
+// Hand cursor on clickable input elements
+input[type="button"], input[type="submit"], input[type="image"], button { cursor:pointer; }
+button[disabled], input[disabled] { cursor:default; }
+
+// Misc form fixes
+button, input, select, textarea {
+	font-size:100%;
+	vertical-align:baseline;  // Improves appearance and consistency in all browsers
+	*vertical-align:middle;
+}
+
+// Align checkboxes, radios, text inputs with their labels: tjkdesign.com/ez-css/css/base.css
+input[type="checkbox"] {
+	vertical-align:text-bottom;
+	*vertical-align:baseline;
+}
+input[type="radio"] { vertical-align:bottom; }
+
+// Removes inner padding and border in FF3+ www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/
+button::-moz-focus-inner, input::-moz-focus-inner { border:0; }
+
+// Fix padding in buttons in IE: viget.com/inspire/styling-the-button-element-in-internet-explorer/
+button { width:auto; overflow:visible; }
+
+// Pre with wrapping: pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/
+pre { white-space:pre; white-space:pre-wrap; white-space:pre-line; word-wrap:break-word; }
+
+// Accessible focus: people.opera.com/patrickl/experiments/keyboard/test
+a:hover, a:active { outline:0; }
+
+{% if (gridCss) { %}// Grid: {%= gridCols %} columns {% if (gridCss) { %}with {%= gridGutter %}% gutter{% } else { %}without gutter{% } %}: http://anygrid.net
+{%= gridCss %}
+{% } %}
