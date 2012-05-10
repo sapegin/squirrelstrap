@@ -10,6 +10,7 @@
  * @license MIT
  */
 
+/*global define:false*/
 (function (factory) {  // Try to register as an anonymous AMD module
 	if (typeof define === 'function' && define.amd) {
 		define(['jquery'], factory);
@@ -17,27 +18,28 @@
 		factory(jQuery);
 	}
 }(function ($) {
+	'use strict';
 
-$.fn.{%= method %} = function(options) {
-	options = $.extend({}, $.fn.{%= method %}.defaults, options);
+	$.fn.{%= method %} = function(options) {
+		options = $.extend({}, $.fn.{%= method %}.defaults, options);
 
-	return this.each(function() {
-		// var elem = $(this);
-		new {%= cls %}($(this), options);
-	});
-};
+		return this.each(function() {
+			// var elem = $(this);
+			new {%= cls %}($(this), options);
+		});
+	};
 
-$.fn.{%= method %}.defaults = {
-};
+	$.fn.{%= method %}.defaults = {
+	};
 
-function {%= cls %}(elem, options) {
-	this.elem = elem;
-	this.options = options;
+	function {%= cls %}(elem, options) {
+		this.elem = elem;
+		this.options = options;
 
-	/* Magic begins here */
-}
+		/* Magic begins here */
+	}
 
-{%= cls %}.prototype = {
-};
+	{%= cls %}.prototype = {
+	};
 
 }));
