@@ -31,6 +31,13 @@ perspective()
 	-o-perspective arguments
 	perspective arguments
 
+animation()
+	-webkit-animation arguments
+	-moz-animation arguments
+	-ms-animation arguments
+	-o-animation arguments
+	animation arguments
+
 overflow-scrolling()
 	-webkit-overflow-scrolling arguments
 	overflow-scrolling arguments
@@ -40,6 +47,10 @@ user-select()
 	-moz-user-select arguments
 	-ms-user-select arguments
 	user-select arguments
+
+text-overflow()
+	-o-text-overflow arguments
+	text-overflow arguments
 
 
 // Gradients: https://github.com/LearnBoost/stylus/issues/245
@@ -71,6 +82,29 @@ text-selection(color, background)
 	::-moz-selection
 		color color
 		background background
+		text-shadow none
 	::selection
 		color color
 		background background
+		text-shadow none
+
+
+// Opacity: https://github.com/visionmedia/nib/blob/master/lib/nib/vendor.styl
+opacity(n, args...)
+	opacity: n args
+	val = round(n * 100)
+	if val == 100
+		-ms-filter: none
+		filter: none
+	else
+		-ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=%s)' % val args
+		filter: 'alpha(opacity=%s)' % val args
+
+
+// Colors
+
+white(opacity)
+	hsla(0,0%,100%,opacity)
+
+black(opacity)
+	hsla(0,0%,0%,opacity)
