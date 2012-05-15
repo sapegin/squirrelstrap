@@ -4,13 +4,13 @@
 (function (factory) {  // Try to register as an anonymous AMD module
 	if (typeof define === 'function' && define.amd) {
 		define([
-			'jquery',
+			'jquery'
 		], factory);
 	} else {
 		factory(jQuery);
 	}
 }(function ($) {
-
+	'use strict';
 
 
 }));

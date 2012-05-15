@@ -15,6 +15,11 @@ exports.template = function(grunt, init, done) {
 			warning: ''
 		},
 		{
+			name: 'amd',
+			message: 'Use AMD? (yes|no)',
+			default: 'yes'
+		},
+		{
 			name: 'mobile',
 			message: 'Mobile version (no)',
 			default: false,
@@ -25,6 +30,17 @@ exports.template = function(grunt, init, done) {
 
 		// Files to copy (and process).
 		var files = init.filesToCopy(props);
+
+		// jQuery
+		if (props.lang === 'ru')
+			props.jquery_path = 'http://yandex.st/jquery/' + props.jquery_ver + '/jquery.min.js';
+		else
+			props.jquery_path = 'http://ajax.googleapis.com/ajax/libs/jquery/' + props.jquery_ver + '/jquery.min.js';
+		files['js/libs/jquery-' + props.jquery_ver + '.min.js'] = 'init/_common/jquery-' + props.jquery_ver + '.min.js';
+
+		// RequireJS
+		if (props.amd)
+			files['js/libs/require.js'] = 'init/_common/require.js';
 
 		// Actually copy (and process) files.
 		init.copyAndProcess(files, props);

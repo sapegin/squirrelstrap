@@ -5,8 +5,7 @@
 	<title></title>
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	{% if (mobile) { %}
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% if (mobile) { %}<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="format-detection" content="telephone=no">{% } %}
 
 	<script src="js/libs/modernizr.js"></script>
@@ -25,12 +24,13 @@
 	<footer class="footer">
 	</footer>
 
-	{% if (lang === 'ru') { %}
-	<!--script src="http://yandex.st/jquery/{%= jquery_ver %}/jquery.min.js"></script-->{% } else { %}
-	<!--script src="http://ajax.googleapis.com/ajax/libs/jquery/{%= jquery_ver %}/jquery.min.js"></script-->{% } %}
-	<!--script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-{%= jquery_ver %}.min.js"%3E%3C/script%3E'))</script-->
+	{% if (amd) { %}
+	<script>require = { paths: { jquery: '{%= jquery_path %}' } }</script>
+	<script src="js/libs/require.js" data-main="js/main"></script>
+	{% } %}
+	<!--script src="{%= jquery_path %}"></script>
+	<script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-{%= jquery_ver %}.min.js"%3E%3C/script%3E'))</script-->
 	<!--script src="js/main.js"></script-->
-	{% if (mobile) { %}
-	<script>/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);</script>{% } %}
+	{% if (mobile) { %}<script>/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);</script>{% } %}
 </body>
 </html>
