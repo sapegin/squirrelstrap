@@ -1,8 +1,5 @@
 /* Author: {%= author_name %}, {%= author_url %}, {%= grunt.template.today('yyyy') %} */
 
-// Traditional typographic scale
-// 8 9 11 12 13 15 16 19 22 24 28 32 48 64 80 96 pixels
-
 body {
 	background:#fff;
 	color:#000;
@@ -17,39 +14,8 @@ body {
 .footer { height:footer-height; }
 body { padding-bottom:footer-height; }{% } %}
 
-/* Fonts
-
-Body:
-	font-family:"Hoefler Text", Cambria, Georgia, serif;
-
-Headings:
-	font-family:"Myriad Pro", "Trebuchet MS", Verdana, Geneva, sans-serif;
-	font-family:"Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif; ??? Not tested
-	font-family:Corbel, Verdana, Geneva, sans-serif;
-	font-family:Cochin, Constantia, Georgia, serif;
-
-Small:
-	font-family:Calibri, "Trebuchet MS", "Helvetica Neue", Tahoma, sans-serif;
-
-Monospace:
-	font-family:Consolas, "Lucida Console", Monaco, "Courier New", Courier, monospace;
-
-http://www.awayback.com/revised-font-stack/
-
-Corbel and Hoefler Text are good fonts for iPad (but it much smaller than Georgia -- you need to make font bigger by ~2px)
-
-*/
 
 * { font-family:Calibri, "Trebuchet MS", "Helvetica Neue", Tahoma, sans-serif; }
-
-// Paul Irish's Bulletproof @font-face syntax: http://mky.be/font-face/bulletproof/
-/*
-@font-face {
-	font-family:"Graublau Web";
-	src:url("GraublauWeb.eot");
-	src:local("☺"), url("GraublauWeb.woff") format("woff"), url("GraublauWeb.ttf") format("truetype");
-}
-*/
 
 
 // Links
@@ -155,14 +121,3 @@ a:link {
 	-webkit-tap-highlight-color:#ff5e99;
 }
 
-
-/* Helper Classes */
-
-// Text without line breaks
-.nobr { white-space:nowrap; }
-
-// Numbers with smaller spaces:1 000 000
-.number {
-	word-spacing:-0.25ex;
-	white-space:nowrap;
-}

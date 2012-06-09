@@ -1,0 +1,90 @@
+/* Author: {%= author_name %}, {%= author_url %}, {%= grunt.template.today('yyyy') %} */
+
+// Some useful snippet
+// Don’t include this file in your project’s stylesheet. Just copy stuff from here.
+
+// Traditional typographic scale
+// 8 9 11 12 13 15 16 19 22 24 28 32 48 64 80 96 pixels
+
+
+/* Fonts
+
+Body:
+	font-family:"Hoefler Text", Cambria, Georgia, serif;
+
+Headings:
+	font-family:"Myriad Pro", "Trebuchet MS", Verdana, Geneva, sans-serif;
+	font-family:"Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif; ??? Not tested
+	font-family:Corbel, Verdana, Geneva, sans-serif;
+	font-family:Cochin, Constantia, Georgia, serif;
+
+Small:
+	font-family:Calibri, "Trebuchet MS", "Helvetica Neue", Tahoma, sans-serif;
+
+Monospace:
+	font-family:Consolas, "Lucida Console", Monaco, "Courier New", Courier, monospace;
+
+http://www.awayback.com/revised-font-stack/
+
+Corbel and Hoefler Text are good fonts for iPad (but it much smaller than Georgia -- you need to make font bigger by ~2px)
+
+*/
+
+// Paul Irish's Bulletproof @font-face syntax: http://mky.be/font-face/bulletproof/
+/*
+@font-face {
+	font-family:"Graublau Web";
+	src:url("GraublauWeb.eot");
+	src:local("☺"), url("GraublauWeb.woff") format("woff"), url("GraublauWeb.ttf") format("truetype");
+}
+*/
+
+
+/* Lists */
+article p + ul, article p + ol {
+	margin-top:-.5em;
+	}
+article li { margin:0 0 .5em; }
+article ul ul, article li li { margin:.5em 0; }
+
+
+/* Unordered lists: yandex.ru */
+ul li { list-style:none; }
+article ul li:before {
+	position:absolute;
+	margin-left:-1.3em;
+	content:"\2014\a0";
+	}
+article ul ul { margin-left:1.3em; }
+article ul li > ul, article ul li > ol { margin-bottom:0; }
+
+
+/* Helper Classes */
+
+// Text without line breaks
+.nobr { white-space:nowrap; }
+
+// Numbers with smaller spaces:1 000 000
+.number {
+	word-spacing:-0.25ex;
+	white-space:nowrap;
+}
+
+
+/* Mobile stuff */
+
+/* iPhone */
+@media (max-width:480px) {
+
+	img { /* Automatic shrink images. */
+		max-width:100%;
+		height:auto;
+	}
+
+}
+
+/* Portrait */
+@media (orientation:portrait) {}
+/* Landscape */
+@media (orientation:landscape) {}
+
