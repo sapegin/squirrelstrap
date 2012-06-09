@@ -121,3 +121,25 @@ a:link {
 	-webkit-tap-highlight-color:#ff5e99;
 }
 
+
+// Layout helpers
+layout-helper(width)
+	clearfix()
+	margin:0 (-1*spacer);
+	&__column
+		width:width;
+		box-sizing:border-box;
+		float:left;
+		padding:0 spacer;
+		&:last-child
+			float:right;
+
+.halves {
+	layout-helper(50%)
+}
+.thirds {
+	layout-helper(33.33333333333333%)
+}
+.quarters {
+	layout-helper(25%)
+}

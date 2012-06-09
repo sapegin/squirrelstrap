@@ -13,10 +13,10 @@ abbr { border-bottom:none; }
 ul { list-style:none; }
 table { border-collapse:collapse; border-spacing:0; }
 
-// Clear fix: nicolasgallagher.com/micro-clearfix-hack/
-.group:before, .group:after { content:""; display:table; }
-.group:after { clear:both; }
-.group { *zoom:1; }  // IE6-7
+// Clearfix
+.group {
+	clearfix()
+}
 
 // Force scrollbar in non IE
 html { overflow-y:scroll; }
