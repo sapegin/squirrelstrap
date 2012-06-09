@@ -3,10 +3,6 @@
 // Traditional typographic scale
 // 8 9 11 12 13 15 16 19 22 24 28 32 48 64 80 96 pixels
 
-// Variables
-{% if (footer) { %}footer-height = {%= footer %}{% } %}
-
-
 body {
 	background:#fff;
 	color:#000;
@@ -57,14 +53,6 @@ Corbel and Hoefler Text are good fonts for iPad (but it much smaller than Georgi
 
 
 // Links
-
-link-color = #1978c8;
-visited-color = #8c5ad2;
-hover-color = #1694ec;
-active-color = #fff  // Active navigation item
-{% if (linkDecor == 'border') { %}link-underline-color = hsla(link-color,.4);
-visited-underline-color = hsla(visited-color,.4);
-hover-underline-color = hsla(active-color,.4);{% } %}
 
 {% if (linkDecor == 'border') { %}a {
 	text-decoration:none;
