@@ -18,8 +18,14 @@ table { border-collapse:collapse; border-spacing:0; }
 	clearfix()
 }
 
-// Force scrollbar in non IE
-html { overflow-y:scroll; }
+html {
+	// Force scrollbar in non IE
+	overflow-y:scroll;
+	// Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g
+	-webkit-text-size-adjust:100%;
+	    -ms-text-size-adjust:100%;
+}
+}
 
 {% if (footer) { %}// Sticky footer
 html { min-height:100%; position:relative; }
