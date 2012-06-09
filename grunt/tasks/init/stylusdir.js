@@ -26,7 +26,7 @@ exports.template = function(grunt, init, done) {
 				name: 'linkDecor',
 				message: 'Link decoration',
 				default: 'underline',
-				warning: 'underline or border'
+				warning: 'underline, gradient or border'
 			},
 			{
 				name: 'gridCols',

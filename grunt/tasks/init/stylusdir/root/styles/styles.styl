@@ -66,43 +66,96 @@ active-color = #fff  // Active navigation item
 visited-underline-color = hsla(visited-color,.4);
 hover-underline-color = hsla(active-color,.4);{% } %}
 
-a {
-	{% if (linkDecor == 'border') { %}text-decoration:none;
+{% if (linkDecor == 'border') { %}a {
+	text-decoration:none;
 	border-bottom-width:1px;
-	border-bottom-style:solid;{% } else { %}
-	text-decoration:underline;{% } %}
+	border-bottom-style:solid;
 	transition:border .1s ease-in-out, color .2s ease-in-out, background .2s ease-in-out;
 }
 a.fake {
-	{% if (linkDecor == 'underline') { %}border-bottom-width:1px;{% } %}
 	border-bottom-style:dotted;
 }
 a:link, nav a:visited, a.fake:visited {
 	color:link-color;
-	{% if (linkDecor == 'border') { %}border-bottom-color:link-underline-color;{% } %}
+	border-bottom-color:link-underline-color;
 }
 a:visited {
 	color:visited-color;
-	{% if (linkDecor == 'border') { %}border-bottom-color:visited-underline-color;{% } %}
+	border-bottom-color:visited-underline-color;
 }
-a:active {
+a:hover, a:active, a:focus, nav a:hover, nav a:active, nav a:focus a.fake:hover, a.fake:active, a.fake:focus {
+	color:hover-color;
+	border-bottom-color:hover-underline-color;
+	border-bottom-width:2px;
+}
+{% } else if (linkDecor == 'gradient') { %}a {
+	text-decoration:none;
+	background-position:0 90%;
+	background-size:5px 1px;
+	background-repeat:repeat-x;
+	transition:border .1s ease-in-out, color .2s ease-in-out, background .2s ease-in-out;
+}
+a:link, nav a:visited {
+	color:link-color;
+	background-image:linear-gradient(left, link-underline-color, link-underline-color);
+}
+a:visited {
+	color:visited-color;
+	background-image:linear-gradient(left, visited-underline-color, visited-underline-color);
+}
+a:hover, a:active, a:focus, nav a:hover, nav a:active nav a:focus {
+	color:hover-color;
+	background-image:linear-gradient(left, hover-underline-color, hover-underline-color);
+}
+a.fake:link, a.fake:visited {
+	color:link-color;
+	background-image:linear-gradient(left, link-underline-color, link-underline-color 50%, transparent 50%);
+}
+a.fake:hover, a.fake:active, a.fake:focus {
+	color:hover-color;
+	background-image:linear-gradient(left, hover-underline-color, hover-underline-color 50%, transparent 50%);
+}
+.no-cssgradients a:link, .no-cssgradients a:visited, .no-cssgradients a:hover, .no-cssgradients a:active, .no-cssgradients a:focus {
+	text-decoration:underline;
+}
+.no-cssgradients a.fake:link, .no-cssgradients a.fake:visited, .no-cssgradients a.fake:hover, .no-cssgradients a.fake:active, .no-cssgradients a.fake:focus {
+	text-decoration:none;
+	border-bottom:1px dotted;
+}
+{% } else { %}a {
+	text-decoration:underline;
+	transition:border .1s ease-in-out, color .2s ease-in-out, background .2s ease-in-out;
+}
+a.fake {
+	text-decoration:none;
+	border-bottom:1px dotted;
+}
+a:link, nav a:visited, a.fake:visited {
+	color:link-color;
+}
+a:visited {
+	color:visited-color;
+}
+a:hover, a:active, a:focus, nav a:hover, nav a:active, nav a:focus, a.fake:hover, a.fake:active, a.fake:focus {
+	color:hover-color;
+}{% } %}a:active {
 	position:relative;
 	top:1px;
 }
-a:hover, a:active, nav a:hover, nav a:active, a.fake:hover, a.fake:active {
-	color:hover-color;
-	{% if (linkDecor == 'border') { %}border-bottom-color:hover-underline-color;
-	border-bottom-width:2px;{% } %}
-}
+
 // Active navigation items
-.active, a.active:link, a.active:visited {
+.is-active, a.is-active:link, a.is-active:visited {
 	background:link-color;
-	color:active-color;
-	{% if (linkDecor == 'underline') { %}text-decoration:none;{% } else { %}
+	color:active-color;{% if (linkDecor == 'underline') { %}
+	text-decoration:none;{% } else { %}
 	border-bottom:none;{% } %}
 }
-a.active:hover, a.active:active {
+a.is-active:hover, a.is-active:active, a.is-active:focus {
 	background:hover-color;
+}
+a.is-current:hover, a.is-current:active, a.is-current:focus {
+	background:link-color;
+	cursor:default;
 }
 
 
