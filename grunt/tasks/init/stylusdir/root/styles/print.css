@@ -1,0 +1,75 @@
+/* © 2011 Artem Sapegin http://sapegin.ru */
+
+@media print {
+
+@page {
+	margin:0.5cm;
+	}
+
+nav {
+	display:none;
+	}
+
+* {
+	font-family:Cambria, Georgia, serif;
+	color:#000 !important;
+	background:transparent !important;
+	float:none !important;
+	width:auto !important;
+	margin-left:0 !important;
+	margin-right:0 !important;
+	padding-left:0 !important;
+	padding-right:0 !important;
+	text-shadow:none !important;
+	-ms-filter:none !important;
+	}
+
+body {
+	padding-bottom:0;
+	}
+
+a {
+	border:none !important;
+	}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family:Corbel, Verdana, Geneva, sans-serif;
+	}
+
+a:link:after, a:visited:after {
+	content:" (" attr(href) ")";
+	font-size:.9em;
+	}
+a[href^="/"]:link:after, a[href^="/"]:visited:after  {
+	content:" (http://site.com" attr(href) ")";
+	font-size:.9em;
+	}
+a[href^="javascript:"]:after, a[href^="#"]:after {
+	content:"";
+	}
+
+header {
+	border-bottom:1pt solid #000;
+	height:auto;
+	}
+header h1 a:before, header h1 span:before {
+	content:url(/favicon.ico);
+	padding-right:2px;
+	}
+header h1 a:after, header h1 span:after {
+	content:" — site.com";
+	}
+
+h1, h2, h3, h4, h5, h6 {
+	page-break-inside:avoid;
+	page-break-after:avoid;
+	}
+p, blockquote, ul, ol, dl, tr, img {
+	page-break-inside:avoid;
+	}
+p, h2, h3 {
+	orphans:3;
+	widows:3;
+	}
+
+}

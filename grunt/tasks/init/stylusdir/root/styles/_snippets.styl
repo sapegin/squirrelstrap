@@ -30,14 +30,6 @@ Corbel and Hoefler Text are good fonts for iPad (but it much smaller than Georgi
 
 */
 
-// Paul Irish's Bulletproof @font-face syntax: http://mky.be/font-face/bulletproof/
-/*
-@font-face {
-	font-family:"Graublau Web";
-	src:url("GraublauWeb.eot");
-	src:local("☺"), url("GraublauWeb.woff") format("woff"), url("GraublauWeb.ttf") format("truetype");
-}
-*/
 
 
 /* Lists */
@@ -88,3 +80,20 @@ article ul li > ul, article ul li > ol { margin-bottom:0; }
 /* Landscape */
 @media (orientation:landscape) {}
 
+
+
+/* IE Hacks
+
+IE6-7:
+.SELECTOR {
+	*rule: value;
+	}
+
+IE6:
+* html .SELECTOR {}
+
+IE7:
+*:first-child+html .SELECTOR {}
+*+html .SELECTOR {} ???
+
+*/
