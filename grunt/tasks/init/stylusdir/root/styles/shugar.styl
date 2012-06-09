@@ -1,4 +1,9 @@
 // Squirrelstrap. © 2012 Artem Sapegin http://sapegin.me
+// Functions and mixins
+
+//
+// Properties shortcuts
+//
 
 // Simple CSS3 properties with vendor prefixes
 
@@ -78,37 +83,6 @@ linear-gradient()
 	g
 
 
-// Clearfix
-// https://github.com/visionmedia/nib/blob/master/lib/nib/clearfix.styl
-clearfix()
-	&:before
-	&:after
-		content ""
-		display table
-	&:after
-		clear both
-		zoom 1
-
-
-// Ellipsis
-ellipsis()
-	overflow hidden
-	text-overflow ellipsis
-	white-space nowrap
-
-
-// Text selection
-text-selection(color, background)
-	::-moz-selection
-		color color
-		background background
-		text-shadow none
-	::selection
-		color color
-		background background
-		text-shadow none
-
-
 // Opacity: https://github.com/visionmedia/nib/blob/master/lib/nib/vendor.styl
 opacity(n, args...)
 	opacity: n args
@@ -128,3 +102,61 @@ white(opacity)
 
 black(opacity)
 	hsla(0,0%,0%,opacity)
+
+
+//
+// Helper functions
+//
+
+// Text selection
+text-selection(color, background)
+	::-moz-selection
+		color color
+		background background
+		text-shadow none
+	::selection
+		color color
+		background background
+		text-shadow none
+
+
+//
+// Mixins
+//
+
+// Clearfix
+// https://github.com/visionmedia/nib/blob/master/lib/nib/clearfix.styl
+clearfix()
+	&:before
+	&:after
+		content ""
+		display table
+	&:after
+		clear both
+		zoom 1
+
+// Ellipsis
+ellipsis()
+	overflow hidden
+	text-overflow ellipsis
+	white-space nowrap
+
+
+// Font icons
+font-icon-base()
+	display inline-block
+	font-style normal
+	speak none
+	-webkit-font-smoothing antialiased
+	span
+		display none
+font-icon(code)
+	content "\e{code}"
+// How to use:
+// .ficon
+// 	font-icon-base()
+// 	font-family:IcoMoon;
+
+// 	&_icon:before {
+// 		font-icon(c0ffee)
+// 	}
