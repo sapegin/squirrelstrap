@@ -61,6 +61,19 @@ pre { white-space:pre; white-space:pre-wrap; white-space:pre-line; word-wrap:bre
 // Accessible focus: people.opera.com/patrickl/experiments/keyboard/test
 a:hover, a:active { outline:0; }
 
+// Hide phone links from desktop browsers
+.no-touch a[href^=tel]:link, .no-touch a[href^=tel]:visited,
+.no-touch a[href^=tel]:hover, .no-touch a[href^=tel]:active, .no-touch a[href^=tel]:focus {
+		position:inherit;
+		text-decoration:inherit;
+		border:inherit;
+		color:inherit;
+		background-image:none;
+		cursor:default;
+	}
+}
+
+
 {% if (gridCols) { %}// Grid: {%= gridCols %} columns {% if (gridCss) { %}with {%= gridGutter %}% gutter{% } else { %}without gutter{% } %}: http://anygrid.net
 {%= gridCss %}
 {% } %}
