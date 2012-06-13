@@ -39,7 +39,7 @@ exports.template = function(grunt, init, done) {
 		files['js/libs/jquery-' + props.jquery_ver + '.min.js'] = 'init/_common/jquery-' + props.jquery_ver + '.min.js';
 
 		// RequireJS
-		if (props.amd)
+		if (props.amd === 'yes')
 			files['js/libs/require.js'] = 'init/_common/require.js';
 
 		// Actually copy (and process) files.

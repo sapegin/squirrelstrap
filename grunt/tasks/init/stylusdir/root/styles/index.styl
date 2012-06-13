@@ -6,10 +6,10 @@ spacer = 10px
 link-color = #1978c8;
 visited-color = #8c5ad2;
 hover-color = #1694ec;
-active-color = #fff  // Active navigation item
-{% if (linkDecor == 'border') { %}link-underline-color = hsla(link-color,.4);
-visited-underline-color = hsla(visited-color,.4);
-hover-underline-color = hsla(active-color,.4);{% } %}
+active-color = #fff;  // Active navigation item
+{% if (linkDecor !== 'underline') { %}link-underline-color = hslaa(link-color,.4);
+visited-underline-color = hslaa(visited-color,.4);
+hover-underline-color = hslaa(hover-color,.4);{% } %}
 
 @import 'shugar'
 @import 'bootstrap'

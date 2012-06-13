@@ -8,7 +8,8 @@
 }
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary { display:block; }
 sup, sub, small, code { line-height:0; }
-a img, a.img { border:none !important; }
+a img { display:block; }
+a img, a.img { border:none !important; background-image:none !important; }
 abbr { border-bottom:none; }
 ul { list-style:none; }
 table { border-collapse:collapse; border-spacing:0; }
@@ -24,7 +25,6 @@ html {
 	// Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g
 	-webkit-text-size-adjust:100%;
 	    -ms-text-size-adjust:100%;
-}
 }
 
 {% if (footer) { %}// Sticky footer
@@ -70,13 +70,12 @@ a:hover, a:active { outline:0; }
 // Hide phone links from desktop browsers
 .no-touch a[href^=tel]:link, .no-touch a[href^=tel]:visited,
 .no-touch a[href^=tel]:hover, .no-touch a[href^=tel]:active, .no-touch a[href^=tel]:focus {
-		position:inherit;
-		text-decoration:inherit;
-		border:inherit;
-		color:inherit;
-		background-image:none;
-		cursor:default;
-	}
+	position:inherit;
+	text-decoration:inherit;
+	border:inherit;
+	color:inherit;
+	background-image:none;
+	cursor:default;
 }
 
 

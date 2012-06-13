@@ -24,7 +24,7 @@
 	<footer class="footer">
 	</footer>
 
-	{% if (amd) { %}
+	{% if (amd === 'yes') { %}
 	<script>require = { paths: { jquery: '{%= jquery_path %}' } }</script>
 	<script src="js/libs/require.js" data-main="js/main"></script>
 	{% } %}

@@ -83,7 +83,8 @@ linear-gradient()
 	g
 
 
-// Opacity: https://github.com/visionmedia/nib/blob/master/lib/nib/vendor.styl
+// Opacity
+// https://github.com/visionmedia/nib/blob/master/lib/nib/vendor.styl
 opacity(n, args...)
 	opacity: n args
 	val = round(n * 100)
@@ -97,11 +98,17 @@ opacity(n, args...)
 
 // Colors
 
-white(opacity)
-	hsla(0,0%,100%,opacity)
+// Changes color opacity
+hslaa(color, opacity)
+	rgba(red(color), green(color), blue(color), opacity)
 
+// White color with transparency
+white(opacity)
+	hsla(0, 0%, 100%, opacity)
+
+// Black color with transparency
 black(opacity)
-	hsla(0,0%,0%,opacity)
+	hsla(0, 0%, 0%, opacity)
 
 
 //
@@ -141,22 +148,40 @@ ellipsis()
 	text-overflow ellipsis
 	white-space nowrap
 
+/* Font icons:
+.ficon
+	font-icon(IcoMoon)
 
-// Font icons
-font-icon-base()
+	&_icon:before {
+		content:"\c0ffee";
+	}
+*/
+font-icon(font)
 	display inline-block
+	font-family font
 	font-style normal
 	speak none
 	-webkit-font-smoothing antialiased
+	&:link, &:visited, &:hover, &:active, &:focus
+		text-decoration none
+		border none
+		background-image none
 	span
 		display none
-font-icon(code)
-	content "\e{code}"
-// How to use:
-// .ficon
-// 	font-icon-base()
-// 	font-family:IcoMoon;
+		.no-generatedcontent &
+			display block
 
-// 	&_icon:before {
-// 		font-icon(c0ffee)
-// 	}
+// Equal columns layout
+equal-columns(columns, customSpacer = spacer)
+	width = 100% / columns
+	clearfix()
+	if customSpacer
+		margin 0 (-1*customSpacer)
+	&__column
+		width width
+		box-sizing border-box
+		float left
+		if customSpacer
+			padding 0 customSpacer
+		&:last-child
+			float right
