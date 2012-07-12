@@ -10,7 +10,8 @@
  * @license MIT
  */
 
-/*global define:false*/
+/*jshint browser:true, jquery:true, white:false, smarttabs:true */
+/*global jQuery:false, define:false*/
 (function (factory) {  // Try to register as an anonymous AMD module
 	if (typeof define === 'function' && define.amd) {
 		define(['jquery'], factory);
@@ -32,14 +33,17 @@
 	$.fn.{%= method %}.defaults = {
 	};
 
-	function {%= cls %}(elem, options) {
-		this.elem = elem;
+	function {%= cls %}(container, options) {
+		this.container = container;
 		this.options = options;
 
-		/* Magic begins here */
+		this.init();
 	}
 
 	{%= cls %}.prototype = {
+		init: function() {
+			/* Magic begins here */
+		}
 	};
 
 }));

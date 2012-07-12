@@ -1,6 +1,7 @@
 /* Author: {%= author_name %}, {%= author_url %}, {%= grunt.template.today('yyyy') %} */
 
-{% if (amd === 'yes') { %}/*global define:false*/
+/*jshint browser:true, jquery:true, white:false, smarttabs:true */
+{% if (amd === 'yes') { %}/*global jQuery:false, define:false*/
 (function (factory) {  // Try to register as an anonymous AMD module
 	if (typeof define === 'function' && define.amd) {
 		define([
@@ -9,7 +10,8 @@
 	} else {
 		factory(jQuery);
 	}
-}{% } %}(function ($) {
+}{% } %}/*global jQuery:false*/
+(function ($) {
 	'use strict';
 
 	initComponents({

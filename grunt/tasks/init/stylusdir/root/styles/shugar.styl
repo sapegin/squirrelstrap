@@ -8,54 +8,44 @@
 // Simple CSS3 properties with vendor prefixes
 
 box-sizing()
-	-moz-box-sizing arguments
-	box-sizing arguments
+	-webkit-box-sizing arguments  // <=iOS4, <= Android 2.3
+	-moz-box-sizing arguments  // FF1+
+	box-sizing arguments  // Chrome, IE8, Opera, Safari 5.1
 
 box-shadow()
-	-webkit-box-shadow arguments
-	box-shadow arguments
+	-webkit-box-shadow arguments  // Saf3-4, iOS 4.0.2 - 4.2, Android 2.3+
+	box-shadow arguments  // Opera 10.5, IE9, FF4+, Chrome 6+, iOS 5
 
 transition()
-	-webkit-transition arguments
-	-moz-transition arguments
-	-ms-transition arguments
-	-o-transition arguments
+	-webkit-transition arguments  // Saf3.2+, Chrome
+	-moz-transition arguments  // FF4+
+	-o-transition arguments  // Opera 10.5+
 	transition arguments
 
 transform()
-	-webkit-transform arguments
-	-moz-transform arguments
-	-ms-transform arguments
-	-o-transform arguments
+	-webkit-transform arguments  // Saf3.1+, Chrome
+	-moz-transform arguments  // FF3.5+
+	-ms-transform arguments  // IE9
+	-o-transform arguments  // Opera 10.5
 	transform arguments
 
 perspective()
-	-webkit-perspective arguments
-	-moz-perspective arguments
-	-ms-perspective arguments
-	-o-perspective arguments
+	-webkit-perspective arguments  // Saf4+, Chrome 12+
+	-moz-perspective arguments  // FF10+
+	-ms-perspective arguments  // IE10+
 	perspective arguments
 
 animation()
-	-webkit-animation arguments
-	-moz-animation arguments
-	-ms-animation arguments
-	-o-animation arguments
+	-webkit-animation arguments  // Saf5, Chrome
+	-moz-animation arguments  // FF5+
+	-o-animation arguments  // Opera 12+
 	animation arguments
-
-overflow-scrolling()
-	-webkit-overflow-scrolling arguments
-	overflow-scrolling arguments
 
 user-select()
 	-webkit-user-select arguments
 	-moz-user-select arguments
-	-ms-user-select arguments
+	-ms-user-select arguments  // IE10+
 	user-select arguments
-
-text-overflow()
-	-o-text-overflow arguments
-	text-overflow arguments
 
 
 // Gradients
@@ -75,25 +65,21 @@ linear-gradient()
 	prop = current-property[0]
 	val = current-property[1]
 	args = unquote(join(', ', arguments))
-	add-property(prop, replace(val, '__CALL__', '-webkit-linear-gradient(%s)' % args))
-	add-property(prop, replace(val, '__CALL__', '-moz-linear-gradient(%s)' % args))
-	add-property(prop, replace(val, '__CALL__', '-ms-linear-gradient(%s)' % args))
-	add-property(prop, replace(val, '__CALL__', '-o-linear-gradient(%s)' % args))
+	add-property(prop, replace(val, '__CALL__', '-webkit-linear-gradient(%s)' % args))  // Chrome 10+, Saf5.1+, iOS 5+
+	add-property(prop, replace(val, '__CALL__', '-moz-linear-gradient(%s)' % args))  // FF3.6+
+	add-property(prop, replace(val, '__CALL__', '-o-linear-gradient(%s)' % args))  // Opera 11.10+
 	g = 'linear-gradient(%s)' % args
 	g
 
 
 // Opacity
-// https://github.com/visionmedia/nib/blob/master/lib/nib/vendor.styl
-opacity(n, args...)
-	opacity: n args
+opacity(n)
+	opacity n
 	val = round(n * 100)
 	if val == 100
-		-ms-filter: none
-		filter: none
+		filter none
 	else
-		-ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=%s)' % val args
-		filter: 'alpha(opacity=%s)' % val args
+		filter 'alpha(opacity=%s)' % val
 
 
 // Colors
@@ -104,11 +90,11 @@ hslaa(color, opacity)
 
 // White color with transparency
 white(opacity)
-	hsla(0, 0%, 100%, opacity)
+	rgba(255, 255, 255, opacity)
 
 // Black color with transparency
 black(opacity)
-	hsla(0, 0%, 0%, opacity)
+	rgba(0, 0, 0, opacity)
 
 
 //
@@ -148,6 +134,12 @@ ellipsis()
 	text-overflow ellipsis
 	white-space nowrap
 
+// Remove columns
+nocols()
+	display block
+	float none
+	width auto
+
 /* Font icons:
 .ficon
 	font-icon(IcoMoon)
@@ -170,18 +162,3 @@ font-icon(font)
 		display none
 		.no-generatedcontent &
 			display block
-
-// Equal columns layout
-equal-columns(columns, customSpacer = spacer)
-	width = 100% / columns
-	clearfix()
-	if customSpacer
-		margin 0 (-1*customSpacer)
-	&__column
-		width width
-		box-sizing border-box
-		float left
-		if customSpacer
-			padding 0 customSpacer
-		&:last-child
-			float right

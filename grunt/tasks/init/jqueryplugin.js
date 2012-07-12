@@ -16,10 +16,8 @@ exports.template = function(grunt, init, done) {
 	], function(err, props) {
 		grunt.utils._.defaults(props, init.defaults);
 
-		console.log(camelize(props.name))
-
 		// File name
-		props.filename = props.name.replace(/ /g, '-').toLowerCase();
+		props.filename = props.name.replace(/ /g, '').toLowerCase();
 
 		// Class name
 		props.cls = camelize(props.name).replace(/[ -]/g, '');
