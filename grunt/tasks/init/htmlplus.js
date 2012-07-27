@@ -24,7 +24,7 @@ exports.template = function(grunt, init, done) {
 			message: 'Mobile version (no)',
 			default: false,
 			warning: ''
-		},
+		}
 	], function(err, props) {
 		grunt.utils._.defaults(props, init.defaults);
 
@@ -41,6 +41,9 @@ exports.template = function(grunt, init, done) {
 		// RequireJS
 		if (props.amd === 'yes')
 			files['js/libs/require.js'] = 'init/_common/require.js';
+
+		// Modernizr
+		files['js/libs/modernizr.js'] = 'init/_common/modernizr.js';
 
 		// Actually copy (and process) files.
 		init.copyAndProcess(files, props);

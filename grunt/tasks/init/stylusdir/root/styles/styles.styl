@@ -2,7 +2,7 @@
 
 body {
 	background:#fff;
-	color:#000;
+	color:base-color;
 	line-height:1.5;
 	margin:0 auto;
 	padding:0 spacer;
@@ -22,7 +22,7 @@ body { padding-bottom:footer-height + spacer; }
 }{% } %}
 
 
-* { font-family:Calibri, "Trebuchet MS", "Helvetica Neue", Tahoma, sans-serif; }
+* { font-family:"Helvetica Neue", Arial, sans-serif; }
 
 
 // Links
@@ -120,22 +120,6 @@ a.is-current:hover, a.is-current:active, a.is-current:focus {
 }
 
 
-// Text selection
-text-selection(#000, #faedb1);
-
-// iOS tap highlighting: j.mp/webkit-tap-highlight-color
-a:link {
-	-webkit-tap-highlight-color:#ff5e99;
-}
-
-
-// Layout helpers
-.halves {
-	equal-columns(2)
-}
-.thirds {
-	equal-columns(3)
-}
-.quarters {
-	equal-columns(4)
-}
+// Text selection and iOS tap highlighting
+text-selection(base-color, #faedb1);
+a:link { -webkit-tap-highlight-color:#ff5e99; }

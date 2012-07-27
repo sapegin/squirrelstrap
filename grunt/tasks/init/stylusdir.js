@@ -30,14 +30,16 @@ exports.template = function(grunt, init, done) {
 			},
 			{
 				name: 'gridCols',
-				message: 'Grid: number of columns',
+				message: "Grid: number of columns or 'simple' or 'none'",
 				default: '12',
 				warning: "Number or 'none'"
 			},
 			{
 				name: 'gridGutter',
 				message: 'Grid: gutter width',
-				default: '5',
+				default: function(value, data, done) {
+					done(null, ['simple', 'none'].indexOf(data.gridCols) === -1 ? 5 : 'none');
+				},
 				warning: '0—19'
 			}
 		], function(err, props) {
