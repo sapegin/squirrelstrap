@@ -14,8 +14,8 @@ How to build this project?
 module.exports = function(grunt) {
 	'use strict';
 
-	// Project configuration.
-	grunt.initConfig({{% if (min_concat) { if (package_json) { %}
+	// Project configuration
+	grunt.initConfig({{% if (js) { if (package_json) { %}
 		pkg: '<json:package.json>',
 		meta: {
 			banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
@@ -30,14 +30,14 @@ module.exports = function(grunt) {
 					"© {%= author_name %}, {%= author_url %}, <%= grunt.template.today('yyyy') %> - " +
 					"Licensed MIT */"{% } else { %}
 			banner: "/*! Author: {%= author_name %}, {%= author_url %}, <%= grunt.template.today('yyyy') %> */"{% } %}
-		},{% } } %}
+		},{% } } %}{% if (js) { %}
 		lint: {
 			files: [
 				'grunt.js',
 				'js/*.js',
 				'{%= lib_dir %}/**/*.js'
 			]
-		},{% if (min_concat) { %}
+		},
 		concat: {
 			dist: {
 				src: [
@@ -54,21 +54,23 @@ module.exports = function(grunt) {
 			}
 		},{% } %}{% if (stylus) { %}
 		stylus: {
-			files: {
-				'{%= wordpress ? "style.css" : "build/styles.css" %}': 'styles/index.styl'
-			},
-			options: {
-				'compress': true,
-				'include css': true,
-				'paths': ['styles']
+			compile: {
+				files: {
+					'{%= wordpress ? "style.css" : "build/styles.css" %}': 'styles/index.styl'
+				},
+				options: {
+					'compress': true,
+					'include css': true,
+					'paths': ['styles']
+				}
 			}
 		},{% } %}{% if (stylus) { %}
 		watch: {{% if (stylus) { %}
 			stylus: {
 				files: 'styles/**',
 				tasks: 'stylus'
-			},{% } %}
-		},{% } %}
+			}{% } %}
+		},{% } %}{% if (js) { %}
 		jshint: {
 			options: {
 				browser: true,
@@ -85,13 +87,13 @@ module.exports = function(grunt) {
 				Modernizr: true{% if (jquery) { %},
 				jQuery: true
 			{% } %}}
-		}{% if (min_concat) { %},
+		},
 		uglify: {}{% } %}
 	});
 	{% if (stylus) { %}
-	grunt.loadNpmTasks('grunt-contrib');{% } %}
+	grunt.loadNpmTasks('grunt-stylus');{% } %}
 
 	// Default task
-	grunt.registerTask('default', 'lint{%= stylus ? " stylus" : "" %}{%= min_concat ? " concat min" : "" %}');
+	grunt.registerTask('default', '{%= stylus ? " stylus" : "" %}{%= js ? " lint concat min" : "" %}');
 
 };

@@ -24,9 +24,9 @@ exports.template = function(grunt, init, done) {
 	var fs = require('fs');
 
 	grunt.helper('prompt', {}, [
-		// Prompt for these values.
+		// Prompt for these values
 		{
-			name: 'min_concat',
+			name: 'js',
 			message: 'JavaScript?',
 			default: 'Y/n',
 			warning: 'Yes: min + concat tasks. No: nothing to see here.'
@@ -46,7 +46,7 @@ exports.template = function(grunt, init, done) {
 	], function(err, props) {
 		grunt.utils._.defaults(props, init.defaults);
 
-		props.min_concat = /y/i.test(props.min_concat);
+		props.js = /y/i.test(props.js);
 		props.stylus = /y/i.test(props.stylus);
 		props.package_json = fs.existsSync('package.json');
 		props.wordpress = fs.existsSync('header.php') && fs.existsSync('footer.php') && fs.existsSync('functions.php');

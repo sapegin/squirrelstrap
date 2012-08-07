@@ -112,6 +112,28 @@ text-selection(color, background)
 		background background
 		text-shadow none
 
+/* Sprites:
+sprite-image = "img/sprite.png";
+sprite-step = 20px;
+...
+E {
+	background-image:sprite-pos(5, 6);
+}
+E {
+	sprite(5, 6, 36, 22);
+	...
+}
+*/
+sprite-pos(x, y) {
+	(-((x - 1)*sprite-step+1)) (-((y - 1)*sprite-step+1))
+}
+sprite(x, y, w, h) {
+	content:"";
+	background:url(sprite-image) sprite-pos(x, y);
+	width:w;
+	height:h;
+}
+
 
 //
 // Mixins
