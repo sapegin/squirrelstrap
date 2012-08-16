@@ -33,6 +33,12 @@ exports.template = function(grunt, init, done) {
 			warning: 'Yes: sweet task. No: nothing to see here.'
 		},
 		{
+			name: 'imgo',
+			message: 'Optimize images?',
+			default: 'y/N',
+			warning: 'Yes: imgo task. No: nothing to see here.'
+		},
+		{
 			name: 'library',
 			message: 'Library name?',
 			default: 'none',
@@ -43,6 +49,7 @@ exports.template = function(grunt, init, done) {
 
 		var stylus = props.stylus = /y/i.test(props.stylus);
 		var sweet = props.sweet = !/n/i.test(props.sweet);
+		var imgo = props.imgo = !/n/i.test(props.imgo);
 		var library = props.library;
 		var js = /y/i.test(props.js);
 		var package_json = fs.existsSync('package.json');
@@ -50,10 +57,10 @@ exports.template = function(grunt, init, done) {
 		var js_script = package_json ? '<%= pkg.name %>' : 'scripts';
 
 		// Guess at some directories, if they exist
-		var dirs = grunt.file.expandDirs('*').map(function(d) { return d.slice(0, -1); });
-		var htdocs_dir = prefer(dirs, ['htdocs', 'www']);
+		var htdocs_dir = preferDir(['htdocs', 'www']);
 		var htdocs_prefix = htdocs_dir ? htdocs_dir + '/' : '';
-		var lib_dir = prefer(dirs, [htdocs_prefix + 'js/mylibs', htdocs_prefix + 'lib', htdocs_prefix + 'src']);
+		var lib_dir = preferDir([htdocs_prefix + 'js/mylibs', htdocs_prefix + 'lib', htdocs_prefix + 'src']);
+		var images_dir = preferDir(['images', 'img', 'i']);
 
 		// JS libraries
 		props.jquery = grunt.file.expandFiles('**/jquery*.js').length > 0;
@@ -153,13 +160,19 @@ exports.template = function(grunt, init, done) {
 				files: {
 					css: {
 						path: htdocs_prefix + 'build/styles.css',
-						href: '/' + htdocs_prefix + 'build/styles.css?{version}'
+						href: '/build/styles.css?{version}'
 					},
 					js: {
-						path: htdocs_prefix + '<config:min.dist.dest>',
-						href: '/<config:min.dist.dest>?{version}'
+						path: htdocs_prefix + 'build/scripts.min.js',
+						href: '/build/scripts.min.js?{version}'
 					}
 				}
+			};
+		}
+
+		if (imgo) {
+			cfg.imgo = {
+				files: htdocs_prefix + (images_dir ? images_dir : 'images') + '/*'
 			};
 		}
 
@@ -173,7 +186,10 @@ exports.template = function(grunt, init, done) {
 			}
 			if (sweet) {
 				cfg.watch.sweet = {
-					files: ['content/**', 'templates/**'],
+					files: [
+						'<%= sweet.content_dir %>/**',
+						'<%= sweet.templates_dir %>/**'
+					],
 					tasks: 'sweet'
 				};
 			}
@@ -214,15 +230,22 @@ exports.template = function(grunt, init, done) {
 
 		// Default task
 		var defaults = [];
+		if (imgo) defaults.push('imgo');
 		if (stylus) defaults.push('stylus');
 		if (js) defaults.push('lint', 'concat', 'min');
 		if (sweet) defaults.push('sweet');
 		props.defaults = defaults.join(' ');
 
+		// Deploy task
+		removeFromArray(defaults, 'lint');
+		removeFromArray(defaults, 'imgo');
+		props.deploy = defaults.join(' ');
+
 		// NPM tasks
 		var npms = [];
 		if (stylus) npms.push('grunt-stylus');
 		if (sweet) npms.push('grunt-sweet');
+		if (imgo) npms.push('grunt-imgo');
 		props.npms = npms.join(' ');
 
 		// Files to copy (and process).
@@ -240,14 +263,22 @@ exports.template = function(grunt, init, done) {
 
 /* Utils */
 
-// Find the first `preferred` item existing in `arr`.
-function prefer(arr, preferred) {
+var path = require('path');
+
+// Find the first `preferred` existing directory
+function preferDir(preferred) {
 	for (var i = 0; i < preferred.length; i++) {
-		if (arr.indexOf(preferred[i]) !== -1) {
+		if (path.existsSync(preferred[i])) {
 			return preferred[i];
 		}
 	}
 	return null;
+}
+
+function removeFromArray(arr, value) {
+	var pos = arr.indexOf(value);
+	if (pos === -1) return;
+	arr.splice(pos, 1);
 }
 
 function jsToString(js, level, first) {

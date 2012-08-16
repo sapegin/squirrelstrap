@@ -18,9 +18,11 @@ module.exports = function(grunt) {
 	grunt.initConfig({%= config %});
 	{% if (stylus) { %}
 	grunt.loadNpmTasks('grunt-stylus');{% } %}{% if (sweet) { %}
-	grunt.loadNpmTasks('grunt-sweet');{% } %}
+	grunt.loadNpmTasks('grunt-sweet');{% } %}{% if (imgo) { %}
+	grunt.loadNpmTasks('grunt-imgo');{% } %}
 
-	// Default task
-	grunt.registerTask('default', '{%= defaults %}');{% if (sweet) { %}
+	// Project tasks
+	grunt.registerTask('default', '{%= defaults %}');
+	grunt.registerTask('deploy', '{%= deploy %}');{% if (sweet) { %}
 	grunt.registerTask('serve', 'server watch');{% } %}
 };
