@@ -10,9 +10,7 @@
 
 	<script src="js/libs/modernizr.js"></script>
 	<link href="css/styles.css" rel="stylesheet">
-	<!--[if lt IE 9]>
-	<link href="css/ie.css" rel="stylesheet">
-	<![endif]-->
+	<!--[if lt IE 9]><link href="css/ie.css" rel="stylesheet"><![endif]-->
 </head>
 <body>
 	<header class="header">
@@ -24,13 +22,8 @@
 	<footer class="footer">
 	</footer>
 
-	{% if (amd === 'yes') { %}
-	<script>require = { paths: { jquery: '{%= jquery_path %}' } }</script>
-	<script src="js/libs/require.js" data-main="js/main"></script>
-	{% } %}
 	<!--script src="{%= jquery_path %}"></script>
 	<script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-{%= jquery_ver %}.min.js"%3E%3C/script%3E'))</script-->
-	<!--script src="js/main.js"></script-->
-	{% if (mobile) { %}<script>/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);</script>{% } %}
+	<!--script src="build/scripts.js"></script-->
 </body>
 </html>

@@ -3,18 +3,14 @@
  */
 
 exports.description = 'Create main JS file.';
+exports.warnOn = ['main.js', 'js/main.js'];
 
 // The actual init template.
 exports.template = function(grunt, init, done) {
+	var path = require('path');
 
-	grunt.helper('prompt', {}, [
-		grunt.helper('prompt_for', 'name', 'main'),
-		{
-			name: 'amd',
-			message: 'Use AMD? (yes|no)',
-			default: 'yes'
-		},
-	], function(err, props) {
+	grunt.helper('prompt', {}, [], function(err, props) {
+
 		grunt.utils._.defaults(props, init.defaults);
 
 		// Files to copy (and process).
@@ -23,15 +19,20 @@ exports.template = function(grunt, init, done) {
 		// jQuery
 		files['libs/jquery-' + props.jquery_ver + '.min.js'] = 'init/_common/jquery-' + props.jquery_ver + '.min.js';
 
-		// RequireJS
-		if (props.amd === 'yes')
-			files['libs/require.js'] = 'init/_common/require.js';
+		// Prepend paths with `js/` if we are in parent directory
+		if (path.basename(process.cwd()) !== 'js') {
+			var jsFiles = {};
+			for (var dest in files) {
+				jsFiles['js/' + dest] = files[dest];
+			}
+			files = jsFiles;
+		}
 
 		// Actually copy (and process) files.
 		init.copyAndProcess(files, props);
 
 		// All done!
 		done();
-	});
 
+	});
 };

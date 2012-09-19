@@ -11,6 +11,7 @@ How to build this project?
 */
 
 /*global module:false*/
+/*jshint node:true*/
 module.exports = function(grunt) {
 	'use strict';
 
@@ -18,7 +19,8 @@ module.exports = function(grunt) {
 	grunt.initConfig({%= config %});
 	{% if (stylus) { %}
 	grunt.loadNpmTasks('grunt-stylus');{% } %}{% if (sweet) { %}
-	grunt.loadNpmTasks('grunt-sweet');{% } %}{% if (imgo) { %}
+	grunt.loadNpmTasks('grunt-sweet');{% } %}{% if (fingerprint) { %}
+	grunt.loadNpmTasks('grunt-fingerprint');{% } %}{% if (imgo) { %}
 	grunt.loadNpmTasks('grunt-imgo');{% } %}
 
 	// Project tasks

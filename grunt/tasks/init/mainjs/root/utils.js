@@ -2,19 +2,13 @@
 
 /*jshint browser:true, jquery:true, white:false, smarttabs:true */
 /*global jQuery:false, define:false*/
-(function (factory) {  // Try to register as an anonymous AMD module
-	if (typeof define === 'function' && define.amd) {
-		define([
-			'jquery'
-		], factory);
-	} else {
-		factory(jQuery);
-	}
-}(function ($) {
+;(function ($) {
 	'use strict';
 
 	/**
 	 * Initialize components
+	 *
+	 * @param {Object} funcs Initializers for each component: { pony: function(elem) { $(elem)... }, ... }
 	 *
 	 * <div data-component="pony"></div>
 	 */
@@ -61,9 +55,8 @@
 		}
 	});
 
-	var utils = {
+	window.utils = {
 		initComponents: initComponents
 	};
-	window.utils = utils;
-	return utils;
-}));
+	
+}(jQuery));

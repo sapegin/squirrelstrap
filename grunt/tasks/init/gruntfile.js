@@ -33,6 +33,12 @@ exports.template = function(grunt, init, done) {
 			warning: 'Yes: sweet task. No: nothing to see here.'
 		},
 		{
+			name: 'fingerprint',
+			message: 'Fingerprint?',
+			default: 'y/N',
+			warning: 'Yes: fingerprint task. No: nothing to see here.'
+		},
+		{
 			name: 'imgo',
 			message: 'Optimize images?',
 			default: 'y/N',
@@ -49,6 +55,7 @@ exports.template = function(grunt, init, done) {
 
 		var stylus = props.stylus = /y/i.test(props.stylus);
 		var sweet = props.sweet = !/n/i.test(props.sweet);
+		var fingerprint = props.fingerprint = !/n/i.test(props.fingerprint);
 		var imgo = props.imgo = !/n/i.test(props.imgo);
 		var library = props.library;
 		var js = /y/i.test(props.js);
@@ -170,14 +177,40 @@ exports.template = function(grunt, init, done) {
 			};
 		}
 
+		if (fingerprint) {
+			cfg.fingerprint = {
+				assets: {
+					files: [
+						'build/*.js',
+						'build/*.css'
+					],
+					filename: 'build/fingerprint.txt'
+				}
+			};
+
+			if (wordpress) {
+				cfg.fingerprint.assets.filename = 'fingerprint.php';
+				cfg.fingerprint.assets.template = "<?php define('V', '<%= fingerprint %>'); ?>";
+			}
+		}
+
 		if (imgo) {
 			cfg.imgo = {
-				files: htdocs_prefix + (images_dir ? images_dir : 'images') + '/*'
+				images: {
+					files: htdocs_prefix + (images_dir ? images_dir : 'images') + '/*',
+					skip: JS("require('os').platform() === 'win32'")
+				}
 			};
 		}
 
-		if (stylus || sweet) {
+		if (stylus || sweet || js) {
 			cfg.watch = {};
+			if (js) {
+				cfg.watch.concat = {
+					files: '<config:concat.dist.src>',
+					tasks: 'concat'
+				};
+			}
 			if (stylus) {
 				cfg.watch.stylus = {
 					files: 'styles/**',
@@ -234,6 +267,7 @@ exports.template = function(grunt, init, done) {
 		if (stylus) defaults.push('stylus');
 		if (js) defaults.push('lint', 'concat', 'min');
 		if (sweet) defaults.push('sweet');
+		if (fingerprint) defaults.push('fingerprint');
 		props.defaults = defaults.join(' ');
 
 		// Deploy task
@@ -246,6 +280,7 @@ exports.template = function(grunt, init, done) {
 		if (stylus) npms.push('grunt-stylus');
 		if (sweet) npms.push('grunt-sweet');
 		if (imgo) npms.push('grunt-imgo');
+		if (fingerprint) npms.push('grunt-fingerprint');
 		props.npms = npms.join(' ');
 
 		// Files to copy (and process).
@@ -296,22 +331,28 @@ function jsToString(js, level, first) {
 
 		s += stringCopy('\t', level);
 		if (!array) s += key + ': ';
+		if (type === 'object') {
+			if (value instanceof JS) type = 'js';
+		}
 		switch (type) {
-			case "number":
+			case 'number':
 				s += value;
 				break;
-			case "boolean":
+			case 'boolean':
 				s += value ? 'true' : 'false';
 				break;
-			case "string":
+			case 'string':
 				s += "'" + value.replace(/'/g, '\\\'') + "'";
 				break;
-			case "array":
-			case "object":
+			case 'array':
+			case 'object':
 				s += jsToString(value, level + 1, false);
 				break;
+			case 'js':
+				s += value.toString();
+				break;
 			default:
-				console.log("jsToString: unknown type: ", type);
+				console.log('jsToString: unknown type: ', type);
 		}
 		if (type !== 'array' && type !== 'object') s += ',\n';
 		has = true;
@@ -334,3 +375,11 @@ function stringCopy(s, num) {
 	}
 	return ss;
 }
+
+function JS(code) {
+	if (!(this instanceof JS)) return new JS(code);
+	this.code = code;
+}
+JS.prototype.toString = function() {
+	return this.code;
+};
