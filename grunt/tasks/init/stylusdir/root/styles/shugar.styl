@@ -47,6 +47,24 @@ user-select()
 	-ms-user-select arguments  // IE10+
 	user-select arguments
 
+column-count()
+	-webkit-column-count arguments
+	-moz-column-count arguments
+	column-count arguments
+
+column-gap()
+	-webkit-column-gap arguments
+	-moz-column-gap arguments
+	column-gap arguments
+
+column-span()
+	-webkit-column-span arguments
+	column-span arguments
+
+column-break-inside()
+	-webkit-column-break-inside arguments
+	column-break-inside arguments
+
 
 // Gradients
 // https://github.com/LearnBoost/stylus/issues/245
@@ -111,6 +129,14 @@ text-selection(color, background)
 		color color
 		background background
 		text-shadow none
+
+// Disable transitions
+no-transition(imp=false)
+	// It is the shortest crossbrowser way
+	if imp
+		transition 0s !important
+	else
+		transition 0s
 
 /* Sprites:
 sprite-image = "img/sprite.png";
