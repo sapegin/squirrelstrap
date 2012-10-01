@@ -69,15 +69,12 @@ column-break-inside()
 // Gradients
 // https://github.com/LearnBoost/stylus/issues/245
 
-replace(str, a, b)
-	str = clone(str)
-	for e, i in str
-		if length(e) > 1
-			str[i] = replace(e, a, b)
-		else
-			if a == e
-				str[i] = b
-	str
+replace(expr, str, val)
+	expr = clone(expr)
+	for e, i in expr
+		if str == e
+			expr[i] = val
+	expr
 
 linear-gradient()
 	prop = current-property[0]
@@ -184,6 +181,7 @@ ellipsis()
 
 // Remove columns
 nocols()
+	position static
 	display block
 	float none
 	width auto
@@ -210,3 +208,17 @@ font-icon(font)
 		display none
 		.no-generatedcontent &
 			display block
+
+// background-image with Retina variant (path@2x.png)
+if retina
+	image(path, x=0, y=0)
+		background url(path) x y
+		@media (-webkit-min-device-pixel-ratio:1.5), (min-resolution:144dpi)
+			ext = extname(path)
+			hdpath = dirname(path) + '/' + basename(path, ext) + '@2x' + ext
+			background url(hdpath) x y
+			imgroot = images-relative-root is defined ? images-relative-root : '.'
+			background-size image-size(pathjoin(imgroot, path))
+else
+	image(path, x=0, y=0)
+		background url(path) x y
