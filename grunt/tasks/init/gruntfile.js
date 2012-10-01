@@ -121,6 +121,7 @@ exports.template = function(grunt, init, done) {
 				dist: {
 					src: [
 						htdocs_prefix + 'js/utils.js',
+						htdocs_prefix + 'blocks/*/*.js',
 						htdocs_prefix + 'js/main.js'
 					],
 					dest: htdocs_prefix + 'build/' + js_script + '.js'

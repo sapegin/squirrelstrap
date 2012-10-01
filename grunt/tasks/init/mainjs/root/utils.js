@@ -1,9 +1,27 @@
 /* Author: Artem Sapegin, http://sapegin.me, 2012 */
 
 /*jshint browser:true, jquery:true, white:false, smarttabs:true */
-/*global jQuery:false, define:false*/
 ;(function ($) {
 	'use strict';
+
+	function _getContainers() {
+		if (document.querySelectorAll) {
+			return document.querySelectorAll('[data-component]');
+		}
+		else {
+			var elems = document.getElementsByTagName('*'),
+				containers = [];
+			for (var elemIdx = 0, elemCnt = elems.length; elemIdx < elemCnt; elemIdx++) {
+				var elem = elems[elemIdx];
+				if (elem.getAttribute('data-component')) {
+					containers.push(elem);
+				}
+			}
+			return containers;
+		}
+	}
+	var _containersCache;
+
 
 	/**
 	 * Initialize components
@@ -13,24 +31,7 @@
 	 * <div data-component="pony"></div>
 	 */
 	function initComponents(funcs) {
-		function getContainers() {
-			if (document.querySelectorAll) {
-				return document.querySelectorAll('[data-component]');
-			}
-			else {
-				var elems = document.getElementsByTagName('*'),
-					containers = [];
-				for (var elemIdx = 0, elemCnt = elems.length; elemIdx < elemCnt; elemIdx++) {
-					var elem = elems[elemIdx];
-					if (elem.getAttribute('data-component')) {
-						containers.push(elem);
-					}
-				}
-				return containers;
-			}
-		}
-
-		var containers = getContainers();
+		var containers = _containersCache || (_containersCache = _getContainers());
 		for (var containerIdx = 0, containerCnt = containers.length; containerIdx < containerCnt; containerIdx++) {
 			var container = containers[containerIdx],
 				component = container.getAttribute('data-component');
@@ -54,6 +55,7 @@
 			e.preventDefault();
 		}
 	});
+
 
 	window.utils = {
 		initComponents: initComponents

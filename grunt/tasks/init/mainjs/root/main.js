@@ -2,7 +2,7 @@
 
 /*jshint browser:true, jquery:true, white:false, smarttabs:true, eqeqeq:true,
          immed:true, latedef:true, newcap:true, undef:true */
-/*global jQuery:false, utils:false */
+/*global utils:false */
 ;(function ($) {
 	'use strict';
 

@@ -1,6 +1,5 @@
 /** Author: {%= author_name %}, {%= author_url %}, {%= grunt.template.today('yyyy') %} */
 
-// Variables
 {% if (footer) { %}footer-height = {%= footer %};{% } %}
 spacer = 10px;
 base-color = #111;
@@ -12,7 +11,7 @@ active-color = #fff;  // Active navigation item
 visited-underline-color = hslaa(visited-color,.4);
 hover-underline-color = hslaa(hover-color,.4);{% } %}site-domain = 'example.com';
 
-@import 'shugar'
-@import 'bootstrap'
-@import 'styles'
-@import 'print'
+@import "shugar";
+@import "bootstrap";
+@import "styles";
+@import "print";
