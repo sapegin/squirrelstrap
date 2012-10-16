@@ -45,13 +45,14 @@
 	/**
 	 * Controls
 	 *
-	 * <span data-trigger="slider-next" data-recepient=".portfolio">Next</span>
+	 * <span data-fire="slider-next" data-to=".portfolio" data-attrs="1,2,3">Next</span>
 	 */
 	$(document).click(function(e) {
 		var target = e.target;
-		if (target.getAttribute('data-trigger') && target.getAttribute('data-recipient')) {
+		if (target.getAttribute('data-fire') && target.getAttribute('data-to')) {
 			target = $(target);
-			$(target.data('recipient')).trigger(target.data('trigger'));
+			var attrs = (''+target.data('attrs')).split(/[;, ]/);
+			$(target.data('to')).trigger(target.data('fire'), attrs);
 			e.preventDefault();
 		}
 	});
