@@ -1,0 +1,9 @@
+/* Author: {%= author_name %}, {%= author_url %}, {%= grunt.template.today('yyyy') %} */
+
+/* Clear fix */
+.group { *zoom:1; }  /* IE6-7 */
+
+.inline-block {
+	display:inline;
+	zoom:1;
+}
