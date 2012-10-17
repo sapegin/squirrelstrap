@@ -3,7 +3,7 @@
 
 @import 'nib/gradients';
 @import 'nib/vendor';
-// @import 'nib/flex';
+@import 'nib/clearfix';
 
 
 //
@@ -115,17 +115,6 @@ sprite(x, y, w, h) {
 //
 // Mixins
 //
-
-// Clearfix
-// https://github.com/visionmedia/nib/blob/master/lib/nib/clearfix.styl
-clearfix()
-	&:before
-	&:after
-		content ""
-		display table
-	&:after
-		clear both
-		zoom 1
 
 // Ellipsis
 ellipsis()
