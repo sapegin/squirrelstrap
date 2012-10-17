@@ -12,14 +12,14 @@
 
 /*jshint browser:true, jquery:true, white:false, smarttabs:true, eqeqeq:true,
          immed:true, latedef:true, newcap:true, undef:true */
-/*global jQuery:false, define:false*/
-(function (factory) {  // Try to register as an anonymous AMD module
+/*global define:false*/
+(function(factory) {  // Try to register as an anonymous AMD module
 	if (typeof define === 'function' && define.amd) {
 		define(['jquery'], factory);
 	} else {
 		factory(jQuery);
 	}
-}(function ($) {
+}(function($) {
 	'use strict';
 
 	$.fn.{%= method %} = function(options) {
