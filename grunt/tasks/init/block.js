@@ -5,8 +5,7 @@
 exports.description = 'Installs common CSS/JS block.';
 
 exports.template = function(grunt, init, done) {
-	var path = require('path'),
-		fs = require('fs');
+	var path = require('path');
 
 	grunt.helper('prompt', {}, [
 		{
@@ -41,7 +40,7 @@ exports.template = function(grunt, init, done) {
 		// Update index.styl
 		var stylusIndex = grunt.file.read('styles/index.styl');
 		if (stylusIndex) {
-			stylusIndex = stylusIndex.replace(/(@import ['"]shugar['"];?)/, '$1\n@import "../blocks/' + block + '";');
+			stylusIndex = stylusIndex.replace(/(@import ['"]shugar['"];?)/, '$1\n@import "' + block + '";');
 			grunt.file.write('styles/index.styl', stylusIndex);
 			grunt.log.writeln('File "styles/index.styl" updated.');
 		}
