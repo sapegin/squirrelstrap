@@ -1,16 +1,13 @@
 /**
 How to build this project?
 
-1. Install Grunt:
-  npm install grunt -g{% if (npms) { %}
-  mkdir node_modules
-  npm install {%= npms %}{% } %}
+1. Install prerequisites:
+   npm install grunt -g{% if (npms) { %}; mkdir node_modules; npm install {%= npms %}{% } %}
 
 2. Build:
-  grunt
+   grunt
 */
 
-/*global module:false*/
 /*jshint node:true*/
 module.exports = function(grunt) {
 	'use strict';

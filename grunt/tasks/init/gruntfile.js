@@ -109,12 +109,14 @@ exports.template = function(grunt, init, done) {
 
 			cfg.lint = {
 				files: [
-					'grunt.js',
-					htdocs_prefix + 'js/main.js'
+					'grunt.js'
 				]
 			};
-			if (lib_dir) {
+			if (library) {
 				cfg.lint.files.push(lib_dir + '/*.js');
+			}
+			else {
+				cfg.lint.files.push('js/mylibs/*.js', htdocs_prefix + 'js/main.js');
 			}
 
 			cfg.concat = {
@@ -142,7 +144,7 @@ exports.template = function(grunt, init, done) {
 					files: {},
 					options: {
 						'include css': true,
-						'paths': ['styles']
+						'paths': ['blocks']
 					}
 				}
 			};

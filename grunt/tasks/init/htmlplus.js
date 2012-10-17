@@ -10,7 +10,7 @@ exports.template = function(grunt, init, done) {
 		grunt.helper('prompt_for', 'name', 'index'),
 		{
 			name: 'lang',
-			message: 'Document language (en)',
+			message: 'Document language',
 			default: 'en',
 			warning: ''
 		},

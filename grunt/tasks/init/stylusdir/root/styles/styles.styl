@@ -8,7 +8,7 @@ body {
 	padding:0 spacer;
 }
 {% if (maxwidth) { %}body, .footer {
-	max-width:{%= maxwidth %};
+	max-width:{%= maxwidth %}px;
 }{% } %}
 
 {% if (footer) { %}// Sticky footer
@@ -99,24 +99,10 @@ a:visited {
 }
 a:hover, a:active, a:focus, nav a:hover, nav a:active, nav a:focus, a.fake:hover, a.fake:active, a.fake:focus {
 	color:hover-color;
-}{% } %}a:active {
+}
+{% } %}a:active {
 	position:relative;
 	top:1px;
-}
-
-// Active navigation items
-.is-active, a.is-active:link, a.is-active:visited {
-	background:link-color;
-	color:active-color;{% if (linkDecor == 'underline') { %}
-	text-decoration:none;{% } else { %}
-	border-bottom:none;{% } %}
-}
-a.is-active:hover, a.is-active:active, a.is-active:focus {
-	background:hover-color;
-}
-a.is-current:hover, a.is-current:active, a.is-current:focus {
-	background:link-color;
-	cursor:default;
 }
 
 
