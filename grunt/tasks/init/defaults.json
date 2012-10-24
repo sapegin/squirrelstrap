@@ -2,5 +2,7 @@
 	"author_name": "Artem Sapegin",
 	"author_email": "artem@sapegin.me",
 	"author_url": "http://sapegin.me",
+	"mysql_username": "root",
+	"mysql_password": "root",
 	"jquery_ver": "1.8.2"
 }
