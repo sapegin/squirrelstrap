@@ -3,7 +3,7 @@
  */
 
 // Basic template description.
-exports.description = 'Create a CSS bootstrap directory.';
+exports.description = '[Deprecated] Create a CSS bootstrap directory.';
 exports.warnOn = 'css';
 
 // The actual init template.
