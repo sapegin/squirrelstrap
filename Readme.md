@@ -28,6 +28,10 @@ In example `grunt init:readme` will make `Readme.md` and `License.md` files with
 
 Installs block from my [block library](https://github.com/sapegin/squirrelstrap/tree/master/grunt/tasks/init/_blocks).
 
+### fabfile
+
+Creates `fabfile.py` for Fabric.
+
 ### gruntfile
 
 Creates `grunt.js` with concat, min, jshint, stylus, sweet, fingerprint, imgo tasks (tasks are optional). With watch and server if needed.
