@@ -2,7 +2,7 @@
  * Magically opens website in a browser via development servers
  */
 
-exports.description = 'Installs Wordpress.';
+exports.description = 'Opens website in a browser (creates dev server if necessary).';
 
 exports.template = function(grunt, init, allDone) {
 
@@ -11,13 +11,12 @@ exports.template = function(grunt, init, allDone) {
 		async = grunt.utils.async,
 		props = init.defaults;
 
-	utils.cdToProjectRoot();
-
 	var projectName = utils.projectName();
 
 
 	// Determine project type
 	var kind;
+	if (utils.isWordpressTheme()) process.chdir('../../..');
 	if (utils.isWordpress()) kind = 'wordpress';
 	if (!kind) grunt.fatal('Unknown project type.');
 
@@ -82,8 +81,7 @@ exports.template = function(grunt, init, allDone) {
 
 			// Database
 			var db = '-u ' + props.mysql_username + ' -p' + props.mysql_password,
-				dbName = 'wp_' + projectName,
-				wpInstalled = true;
+				dbName = 'wp_' + projectName;
 			ops.push(
 				utils.wlog('Checking MySQL database... '),
 				function(done) {
@@ -92,7 +90,6 @@ exports.template = function(grunt, init, allDone) {
 							done();
 						}
 						else {
-							wpInstalled = false;
 							exec("mysqladmin " + db + " create " + dbName, function() { done(); });
 						}
 					});
@@ -102,7 +99,7 @@ exports.template = function(grunt, init, allDone) {
 
 			// Starting browsers
 			ops.push(
-				utils.wshell('open "http://' + hostName + '/"' + (wpInstalled ? '' : 'wp-admin/install.php'))
+				utils.wshell('open "http://' + hostName)
 			);
 
 			break;
