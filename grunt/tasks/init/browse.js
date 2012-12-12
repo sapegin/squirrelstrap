@@ -99,7 +99,7 @@ exports.template = function(grunt, init, allDone) {
 
 			// Starting browsers
 			ops.push(
-				utils.wshell('open "http://' + hostName)
+				utils.wshell('open "http://' + hostName + '/"')
 			);
 
 			break;
