@@ -120,7 +120,7 @@ exports.template = function(grunt, init, done) {
 			}
 
 			cfg.concat = {
-				dist: {
+				main: {
 					src: [
 						htdocs_prefix + 'js/utils.js',
 						htdocs_prefix + 'blocks/*/*.js',
@@ -131,9 +131,9 @@ exports.template = function(grunt, init, done) {
 			};
 
 			cfg.min = {
-				dist: {
-					src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-					dest: htdocs_prefix + 'build/' + js_script + '.min.js'
+				main: {
+					src: ['<banner:meta.banner>', '<%= concat.main.dest %>'],
+					dest: '<%= concat.main.dest %>'
 				}
 			};
 		}
@@ -173,8 +173,8 @@ exports.template = function(grunt, init, done) {
 						href: '/build/styles.css?{version}'
 					},
 					js: {
-						path: htdocs_prefix + 'build/scripts.min.js',
-						href: '/build/scripts.min.js?{version}'
+						path: htdocs_prefix + 'build/scripts.js',
+						href: '/build/scripts.js?{version}'
 					}
 				}
 			};
@@ -210,7 +210,7 @@ exports.template = function(grunt, init, done) {
 			cfg.watch = {};
 			if (js) {
 				cfg.watch.concat = {
-					files: '<config:concat.dist.src>',
+					files: '<config:concat.main.src>',
 					tasks: 'concat'
 				};
 			}
@@ -234,7 +234,7 @@ exports.template = function(grunt, init, done) {
 		if (sweet) {
 			cfg.server = {
 				port: 8000,
-				base: '<config:sweet.publish_dir>'
+				base: '<%= sweet.publish_dir %>'
 			};
 		}
 
@@ -246,7 +246,7 @@ exports.template = function(grunt, init, done) {
 					smarttabs: true,
 					eqeqeq: true,
 					immed: true,
-					latedef: true,
+					latedef: false,
 					newcap: true,
 					undef: true
 				},

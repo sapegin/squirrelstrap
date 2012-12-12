@@ -2,7 +2,7 @@
 How to build this project?
 
 1. Install prerequisites:
-   npm install grunt -g{% if (npms) { %}; mkdir node_modules; npm install {%= npms %}{% } %}
+   npm install grunt -g{% if (npms) { %}; npm install {%= npms %}{% } %}
 
 2. Build:
    grunt
