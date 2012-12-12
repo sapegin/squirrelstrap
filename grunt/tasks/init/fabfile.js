@@ -5,6 +5,7 @@
  */
 
 exports.description = 'Create a Fabfile.';
+exports.warnOn = 'fabfile.py';
 
 exports.template = function(grunt, init, done) {
 
@@ -12,27 +13,41 @@ exports.template = function(grunt, init, done) {
 
 	grunt.helper('prompt', {}, [
 		{
+			name: 'name',
+			message: 'Project name',
+			'default': utils.projectName()
+		},
+		{
 			name: 'server',
 			message: 'Server (~/.ssh/config alias)',
-			default: 'locum'
+			'default': 'locum'
 		},
 		{
 			name: 'grunt',
-			message: 'Grunt?',
-			default: 'Y/n'
+			message: 'Run Grunt via SSH?',
+			'default': 'Y/n'
 		},
 		{
-			name: 'bare',
-			message: 'Use bare git repo?',
-			default: 'Y/n'
-		},		
+			name: 'kind',
+			message: 'Repo type (bb|gh|bare)?',
+			'default': 'bb'
+		}
 	], function(err, props) {
 		grunt.utils._.defaults(props, init.defaults);
 
-		props.name = utils.projectName();
 		props.grunt = /y/i.test(props.grunt);
-		props.bare = /y/i.test(props.bare);
 		props.upgrade = props.grunt;
+
+		switch (props.kind) {
+			case 'bb':
+				props.repo = 'git@bitbucket.org:sapegin/' + props.name + '.git';
+				break;
+			case 'gh':
+				props.repo = 'git@github.com:sapegin/' + props.name + '.git';
+				break;
+			default:  // bare
+				props.repo = '~/git/' + props.name + '.git';
+		}
 
 		// Files to copy (and process).
 		var files = init.filesToCopy(props);
