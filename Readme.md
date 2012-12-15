@@ -1,97 +1,84 @@
 # Squirrelstrap
 
-Set of [Grunt](https://github.com/gruntjs/grunt) (`grunt init`) templates for faster front-end web development. You can use them as example or as a base for your own templates.
+Set of extremely opinionated [grunt-init](https://github.com/gruntjs/grunt-init) templates for faster front-end web development. You can use them as example or as a base for your own templates.
 
 
 ## Installation
 
-1. Install [Grunt](https://github.com/gruntjs/grunt) via `npm install grunt -g`.
+1. Install [grunt-init](https://github.com/gruntjs/grunt-init): `npm install grunt-init -g`.
 
-1. Place templates into `~/.grunt/tasks/init` folder.
+1. Place templates into `~/.grunt-init` folder.
 
 1. Edit `defaults.json`.
 
 Now you can type something like this:
 
 ```bash
-grunt init:templatename
+grunt-init templatename
 ```
 
-In example `grunt init:readme` will make `Readme.md` and `License.md` files with your copyright information in current folder.
+For example `grunt-init readme` will make `Readme.md` and `License.md` files with your copyright information in current folder.
 
 
 ## Templates
 
-**Note**. Some templates can add jQuery, Modernizr or other libraries when needed.
+**Note**. Some templates can add jQuery, Modernizr or other files when needed.
 
-### block
+### [block](https://github.com/sapegin/squirrelstrap/tree/master/templates/block)
 
-Installs block from my [block library](https://github.com/sapegin/squirrelstrap/tree/master/grunt/tasks/init/_blocks).
+Install block from my [block library](https://github.com/sapegin/squirrelstrap/tree/master/templates/_blocks).
 
-### fabfile
+### [browse](https://github.com/sapegin/squirrelstrap/tree/master/templates/browse) (**Experimental**)
 
-Creates `fabfile.py` for Fabric.
+Magically open website in a browser via development servers. Support Wordpress.
 
-### gruntfile
+### [fabfile](https://github.com/sapegin/squirrelstrap/tree/master/templates/fabfile)
 
-Creates `grunt.js` with concat, min, jshint, stylus, sweet, fingerprint, imgo tasks (tasks are optional). With watch and server if needed.
+Create `fabfile.py` for [Fabric](http://fabfile.org/).
 
-### html
+### [gruntfile](https://github.com/sapegin/squirrelstrap/tree/master/templates/gruntfile)
 
-Creates simple HTML file.
+Create `Gruntfile.coffee` with concat, uglify, jshint, stylus, sweet, fingerprint, imgo and compress tasks (tasks are optional). With watch and web server if needed. Also add `.jshintrc` and `.editorconfig`.
 
-### htmlplus
+### [html](https://github.com/sapegin/squirrelstrap/tree/master/templates/html)
 
-Creates HTML file with links to CSS and JS and basic layout.
+Create simple HTML file.
 
-### jquerylib
+### [htmlplus](https://github.com/sapegin/squirrelstrap/tree/master/templates/htmlplus)
 
-Creates jQuery library (`new Bla()`, not `jquery.fn`) with optional AMD support, default options, etc.
+Create HTML file with links to CSS and JS and basic layout.
 
-### jqueryplugin
+### [jquerylib](https://github.com/sapegin/squirrelstrap/tree/master/templates/jquerylib)
 
-Creates jQuery plugin (`jquery.fn.blabla`) with optional AMD support, default options, etc.
+Create jQuery library (`new Pony()`, not `jquery.fn.pony`) with optional AMD support, default options, etc.
 
-### jsmodule
+### [jqueryplugin](https://github.com/sapegin/squirrelstrap/tree/master/templates/jqueryplugin)
 
-Creates JavaScript module (it’s just JS file with optional AMD wrapper and copyright).
+Create jQuery plugin (`jquery.fn.pony`) with optional AMD support, default options, etc.
 
-### license
+### [jsmodule](https://github.com/sapegin/squirrelstrap/tree/master/templates/jsmodule)
 
-Creates `License.md` file with MIT license text.
+Create JavaScript module (it’s just JS file with optional AMD wrapper and copyright).
 
-### mainjs
+### [license](https://github.com/sapegin/squirrelstrap/tree/master/templates/license)
 
-Adds `main.js` and `utils.js` to project. It’s my JavaScript bootstrap.
+Create `License.md` file with MIT license text.
 
-### readme
+### [mainjs](https://github.com/sapegin/squirrelstrap/tree/master/templates/mainjs)
 
-Creates `Readme.md` file.
+Add `main.js` and `utils.js` to project. It’s my JavaScript bootstrap.
 
-### stylusdir
+### [readme](https://github.com/sapegin/squirrelstrap/tree/master/templates/readme)
 
-Creates `styles` folder with my Stylus bootstrap files.
+Create `Readme.md` file.
 
-### wordpress
+### [stylusdir](https://github.com/sapegin/squirrelstrap/tree/master/templates/stylusdir)
 
-Installs Wordpress: download/extract it, creates MySQL database, updates config file, etc.
+Create `styles` folder with my Stylus bootstrap files.
 
+### [wordpress](https://github.com/sapegin/squirrelstrap/tree/master/templates/wordpress)
 
-## Tips & Tricks
-
-### Bash alias
-
-You can create bash alias to invoke templates even faster. Add to your `~/.bash_profile`:
-
-```bash
-gi() { grunt init:$@ ;}
-```
-
-Then run `source ~/.bash_profile`. Now you can invoke templates as easy as:
-
-```bash
-gi templatename
-```
+Install Wordpress: download/extract it, creates MySQL database, updates config file, etc.
 
 
 ---
