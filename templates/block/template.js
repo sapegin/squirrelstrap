@@ -1,65 +1,91 @@
 /**
  * Blocks library installer
+ * Usage: grunt-init block:[name]
+ *
+ * @author Artem Sapegin, http://sapegin.me
  */
 
-exports.description = 'Install common CSS/JS block.';
-
-var blocks_folder = '../../_blocks';
+exports.description = 'Install common CSS/JS block from blocks library.';
 
 exports.template = function(grunt, init, done) {
+	'use strict';
+
 	var path = require('path');
 
-	// @todo Check styles/index.styl exists
+	var blocksFolder = path.join(__dirname, '../_blocks');
+	var block = blockName();
 
-	init.process({}, [
-		{
-			name: 'block',
-			message: 'Block name'
-		}
-	], function(err, props) {
-		var block = props.block;
+	if (!block) {
+		printInstalledBlocksList();
+		printBlocksList();
+		done();
+		return;
+	}
 
-		if (!block) {
-			printBlocksList();
-			done();
-		}
+	if (!grunt.file.exists('styles/index.styl')) {
+		grunt.log.writeln();
+		grunt.fatal('"styles/index.styl" not found. Run "grunt-init styludir" to initialize it.');
+	}
 
-		// Copy files
+	// Copy files
 
-		var folder = init.srcpath(path.join(blocks_folder, block));
-		if (!folder) {
-			printBlocksList();
-			grunt.fatal('Block "' + block + '" not found.');
-		}
+	var folder = path.join(blocksFolder, block);
+	console.log(folder);
+	if (!folder) {
+		grunt.log.writeln();
+		grunt.log.error('Block "' + block + '" not found.');
+		printBlocksList();
+		done();
+		return;
+	}
 
-		var blockFiles = grunt.file.expandFiles(path.join(folder, '*'));
+	grunt.log.writeln();
 
-		var files = {};
-		blockFiles.forEach(function(filepath) {
-			files[path.join('blocks', block, path.basename(filepath))] = filepath;
-		});
+	var blockFiles = grunt.file.expandFiles(path.join(folder, '*'));
 
-		init.copyAndProcess(files, props);
+	var files = {};
+	blockFiles.forEach(function(filepath) {
+		files[path.join('blocks', block, path.basename(filepath))] = filepath;
+	});
 
-		// Update index.styl
-		var stylusIndex = grunt.file.read('styles/index.styl');
-		if (stylusIndex) {
-			stylusIndex = stylusIndex.replace(/(@import ['"]shugar['"];?)/, '$1\n@import "' + block + '";');
+	init.copyAndProcess(files, {});
+
+	grunt.log.writeln('Block "' + block + '" installed.');
+
+	// Update index.styl
+	var stylusIndex = grunt.file.read('styles/index.styl');
+	if (stylusIndex) {
+		var importStr = '@import "' + block + '"';
+		if (stylusIndex.indexOf(importStr) === -1) {
+			stylusIndex = stylusIndex.replace(/(@import ['"]shugar['"];?)/, '$1\n' + importStr);
 			grunt.file.write('styles/index.styl', stylusIndex);
 			grunt.log.writeln('File "styles/index.styl" updated.');
 		}
+	}
 
-		done();
-	});
+	done();
+
+
+	function blockName() {
+		var flags = grunt.util._.keys(init.flags);
+		return flags.length && flags[0];
+	}
+
+	function printInstalledBlocksList() {
+		printList('blocks', 'Installed blocks');
+	}
 
 	function printBlocksList() {
-		var root = init.srcpath(blocks_folder),
-			dirs = grunt.file.expandDirs(path.join(root, '*')),
-			blocks = dirs.map(function(filepath) { return path.basename(filepath).slice(0, -1); });
+		printList(blocksFolder, 'Available blocks');
+	}
 
-		grunt.log.subhead('Available blocks:');
-		grunt.log.writeln(blocks.join('\n'));
-		grunt.log.writeln();
+	function printList(root, title) {
+		var dirs = grunt.file.expandDirs(path.join(root, '*'));
+		var blocks = dirs.map(function(filepath) { return path.basename(filepath); });
+
+		if (!blocks.length) return;
+		grunt.log.subhead(title + ':');
+		grunt.log.writeln('- ' + blocks.join('\n- '));
 	}
 
 };
