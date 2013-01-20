@@ -87,7 +87,8 @@ sprite-image = "img/sprite.png";
 sprite-step = 20px;
 ...
 E {
-	background-image:sprite-pos(5, 6);
+	sprite-bg();
+	sprite-pos(5, 6);
 }
 E {
 	sprite(5, 6, 36, 22);
@@ -105,7 +106,10 @@ sprite-y(y) {
 sprite-pos(x, y) {
 	background-position:sprite-x(x) sprite-y(y);
 }
-sprite(x, y, w, h) {	
+sprite-bg(x=0, y=0) {
+	image(sprite-image, x, x)
+}
+sprite(x, y, w, h) {
 	image(sprite-image, sprite-x(x), sprite-y(y))
 	content:"";
 	width:w;

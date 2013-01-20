@@ -95,6 +95,14 @@ pre { white-space:pre; white-space:pre-wrap; white-space:pre-line; word-wrap:bre
 // Accessible focus: people.opera.com/patrickl/experiments/keyboard/test
 a:hover, a:active { outline:0; }
 
+// Text selection and iOS tap highlighting
+if light(bg-color)
+	selection-color = hslaa(darken(bg-color,60),.5)
+else
+	selection-color = hslaa(lighten(bg-color,60),.5)
+text-selection(base-color, selection-color);
+a:link { -webkit-tap-highlight-color:hslaa(selection-color,.25); }
+
 // Hide phone links from desktop browsers
 .no-touch a[href^=tel]:link, .no-touch a[href^=tel]:visited,
 .no-touch a[href^=tel]:hover, .no-touch a[href^=tel]:active, .no-touch a[href^=tel]:focus {
