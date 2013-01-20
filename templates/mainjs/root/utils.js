@@ -1,6 +1,5 @@
 /* Author: Artem Sapegin, http://sapegin.me, 2012 */
 
-/*jshint browser:true, jquery:true, white:false, smarttabs:true */
 ;(function ($) {
 	'use strict';
 
@@ -61,5 +60,5 @@
 	window.utils = {
 		initComponents: initComponents
 	};
-	
+
 }(jQuery));

@@ -1,10 +1,13 @@
 /**
  * Installs latest version of Wordpress
+ *
+ * @author Artem Sapegin, http://sapegin.me
  */
 
 exports.description = 'Installs Wordpress.';
 
 exports.template = function(grunt, init, allDone) {
+	'use strict';
 
 	var wpDownloadUrl = 'http://wordpress.org/latest.zip';
 
@@ -44,6 +47,7 @@ exports.template = function(grunt, init, allDone) {
 		// Remove unnecessary stuff
 		shell('unlink wp-config-sample.php'),
 		shell('unlink readme.html'),
+		shell('unlink license.txt'),
 		shell('unlink wp-content/plugins/hello.php'),
 		shell('rm -rf wp-content/themes/twentyeleven'),
 		shell('rm -rf wp-content/themes/twentyten'),
@@ -64,6 +68,7 @@ exports.template = function(grunt, init, allDone) {
 			var files = init.filesToCopy();
 			props.mysql_database = mysqlDatabase;
 			props.keys = randomTokens(8);
+			files['humans.txt'] = 'init/_common/humans.txt';
 			init.copyAndProcess(files, props);
 			done();
 		}

@@ -1,13 +1,13 @@
 {
 	"browser": true,
+	"jquery": true,
 	"white": false,
 	"smarttabs": true,
 	"eqeqeq": true,
 	"immed": true,
-	"latedef": true,
+	"latedef": false,
 	"newcap": true,
 	"undef": true,
-	"jquery": true,
 	"globals": {
 		"Modernizr": true
 	}

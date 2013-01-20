@@ -145,11 +145,11 @@ exports.template = function(grunt, init, done) {
 		if (stylus) {
 			cfg.stylus = {
 				compile: {
-					files: {},
 					options: {
 						'include css': true,
 						'paths': ['blocks']
-					}
+					},
+					files: {}
 				}
 			};
 
@@ -288,12 +288,13 @@ exports.template = function(grunt, init, done) {
 		init.writePackageJSON('package.json', package_json);
 
 		// Install NPM packages
-		var npms = ['grunt'];
+		var npms = ['grunt', 'matchdep'];
 		if (js) npms.push('grunt-contrib-concat', 'grunt-contrib-uglify', 'grunt-contrib-jshint');
 		if (stylus || sweet || js) npms.push('grunt-contrib-watch');
 		if (stylus) npms.push('grunt-contrib-stylus');
 		if (sweet) npms.push('grunt-contrib-connect', 'grunt-sweet');
-		if (imgo) npms.push('grunt-contrib-connect', 'grunt-sweet');
+		if (imgo) npms.push('grunt-imgo');
+		if (compress) npms.push('grunt-contrib-compress');
 
 		var args = ['install'];
 		Array.prototype.push.apply(args, npms);
