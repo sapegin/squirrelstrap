@@ -30,7 +30,6 @@ exports.template = function(grunt, init, done) {
 	// Copy files
 
 	var folder = path.join(blocksFolder, block);
-	console.log(folder);
 	if (!folder) {
 		grunt.log.writeln();
 		grunt.log.error('Block "' + block + '" not found.');
