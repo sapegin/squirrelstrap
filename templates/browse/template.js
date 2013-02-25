@@ -5,10 +5,11 @@
 exports.description = 'Opens website in a browser (creates dev server if necessary).';
 
 exports.template = function(grunt, init, allDone) {
+	'use strict';
 
-	var utils = require('./_src/utils')(grunt),
+	var utils = require('../_src/utils').init(grunt, init),
 		exec = require('child_process').exec,
-		async = grunt.utils.async,
+		async = grunt.util.async,
 		props = init.defaults;
 
 	var projectName = utils.projectName();
@@ -45,7 +46,7 @@ exports.template = function(grunt, init, allDone) {
 					utils.wok()
 				);
 			}
-			
+
 			// /etc/hosts
 			var hostsFilePath = '/etc/hosts',
 				hostsFile = grunt.file.read(hostsFilePath);

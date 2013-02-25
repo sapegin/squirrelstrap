@@ -41,7 +41,8 @@ def setup():{% if (kind === 'bare') { %}
 		run('git config receive.denyNonFastforwards true')
 	remote = 'ssh://%s@%s/~/%s' % (env['user'], env['host'], REPO)
 	local('git remote add origin %s' % remote)
-	local('git push -u origin master'){% } %}
+	local('git push -u origin master'){% } else { %}
+	run('mkdir -p %s' % DEST){% } %}
 	with cd(DEST):
 		run('git clone %s .' % REPO){% if (upgrade) { %}
 	upgrade(){% } %}

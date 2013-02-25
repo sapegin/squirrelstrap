@@ -79,7 +79,7 @@ exports.template = function(grunt, init, done) {
 		var images_dir = utils.preferDir(['images', 'img', 'i']);
 
 		// JS libraries
-		props.jquery = grunt.file.expandFiles('**/jquery*.js').length > 0;
+		props.jquery = grunt.file.expand('**/jquery*.js').length > 0;
 
 		// Config
 		var cfg = {};
@@ -187,7 +187,7 @@ exports.template = function(grunt, init, done) {
 		if (fingerprint) {
 			cfg.fingerprint = {
 				assets: {
-					files: [
+					src: [
 						'build/*.js',
 						'build/*.css'
 					],
@@ -204,7 +204,7 @@ exports.template = function(grunt, init, done) {
 		if (imgo) {
 			cfg.imgo = {
 				images: {
-					files: htdocs_prefix + (images_dir ? images_dir : 'images') + '/*',
+					src: htdocs_prefix + (images_dir ? images_dir : 'images') + '/*',
 					skip: utils.JS('require("os").platform() == "win32"')
 				}
 			};
