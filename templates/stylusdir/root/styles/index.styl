@@ -1,17 +1,19 @@
 /** Author: {%= author_name %}, {%= author_url %}, {%= grunt.template.today('yyyy') %} */
 
-{% if (footer) { %}footer-height = {%= footer %};{% } %}
+max-width = 1200px;
+content-max-width = null;
+sticky-footer-height = null;
 spacer = 10px;
 bg-color = #fff;
 base-color = #111;
 link-color = #1978c8;
 visited-color = #8c5ad2;
 hover-color = #1694ec;
-{% if (linkDecor !== 'underline') { %}link-underline-color = hslaa(link-color,.4);
+link-underline-color = hslaa(link-color,.4);
 visited-underline-color = hslaa(visited-color,.4);
-hover-underline-color = hslaa(hover-color,.4);{% } %}site-domain = 'example.com';
+hover-underline-color = hslaa(hover-color,.4);
+site-domain = 'example.com';  // For print style sheet
 
-@import "shugar";
-@import "bootstrap";
+@import "squirrel";
 @import "styles";
 @import "print";
