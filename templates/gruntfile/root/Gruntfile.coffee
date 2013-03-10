@@ -1,11 +1,12 @@
 # gruntjs.com
 
-#jshint node:true
 module.exports = (grunt) ->
 	"use strict"
 
 	require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
 
+	{% if (js || stylus) { %}debug = !!grunt.option("debug")
+	{% } %}
 	# Project configuration
 	grunt.initConfig
 {%= config %}

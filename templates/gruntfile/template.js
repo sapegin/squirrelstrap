@@ -92,7 +92,7 @@ exports.template = function(grunt, init, done) {
 						'"/*! <%= pkg.title || pkg.name %> v<%= pkg.version %>"\n',
 						'" * © <%= pkg.author.name %>, <%= pkg.homepage ? pkg.homepage : "" %>, "',
 							'"<%= grunt.template.today(\'yyyy\') %> - "',
-							'" Licensed <%= _.pluck(pkg.licenses, \'type\').join(\', \') %> */"'
+							'" Licensed <%= _.pluck(pkg.licenses, \'type\').join(\', \') %> */"\n'
 					].join(',\n'));
 				}
 				else {
@@ -100,13 +100,13 @@ exports.template = function(grunt, init, done) {
 					cfg.banner = utils.JS([
 						'"/*! ' + library + ' v<%= version %>' + '"\n',
 						'" * © ' + props.author_name + ', ' + props.author_url + ', <%= grunt.template.today(\'yyyy\') %> - ' +
-							'Licensed MIT */"'
+							'Licensed MIT */"\n'
 					].join(',\n'));
 				}
 			}
 			else {
 				cfg.banner = '/*! Author: ' + props.author_name + ', ' + props.author_url + ', ' +
-					"<%= grunt.template.today('yyyy') %> */";
+					"<%= grunt.template.today('yyyy') %> */\n";
 			}
 
 			cfg.jshint = {
@@ -135,6 +135,14 @@ exports.template = function(grunt, init, done) {
 
 			cfg.uglify = {
 				main: {
+					options: {
+						banner: '<%= banner %>',
+						compress: {
+							global_defs: {
+								DEBUG: utils.JS('debug')
+							}
+						}
+					},
 					files: {
 						'<%= concat.main.dest %>': '<%= concat.main.dest %>'
 					}
@@ -147,6 +155,9 @@ exports.template = function(grunt, init, done) {
 				compile: {
 					options: {
 						'include css': true,
+						'define': {
+							DEBUG: utils.JS('debug')
+						},
 						'paths': ['blocks']
 					},
 					files: {}
