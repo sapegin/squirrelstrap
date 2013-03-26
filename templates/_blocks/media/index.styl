@@ -1,0 +1,20 @@
+// Media object
+// Based on https://github.com/csswizardry/inuit.css/blob/master/objects/_media.scss
+
+// Media object.
+//
+// .media__img.media__img_rev - Reversed image location (right instead of left).
+.media
+	clearfix()
+	display: block
+
+	&__img
+		float: left
+		margin-right: spacer
+	&__img_rev
+		float: right
+		margin-right: 0
+		margin-left: spacer
+
+	&__body
+		overflow: hidden
