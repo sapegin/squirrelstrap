@@ -7,6 +7,6 @@
 	"latedef": false,
 	"newcap": true,
 	"undef": true,
-	"trailing:" true,
+	"trailing": true,
 	"node": true
 }
