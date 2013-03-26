@@ -28,7 +28,7 @@ list-inside ?= false
 		@extend .list
 
 if not list-inside and max-width
-	_query = "(max-width: " + max-width + ")"
+	_query = "(max-width:%s)" % max-width
 	@media _query
 		.list > li,
 		.text ul > li
