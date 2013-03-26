@@ -89,24 +89,24 @@ exports.template = function(grunt, init, done) {
 				if (package_json) {
 					cfg.pkg = utils.JS('grunt.file.readJSON("package.json")');
 					cfg.banner = utils.JS([
-						'"/*! <%= pkg.title || pkg.name %> v<%= pkg.version %>"\n',
+						'"/*! <%= pkg.title || pkg.name %> v<%= pkg.version %>"\\n',
 						'" * © <%= pkg.author.name %>, <%= pkg.homepage ? pkg.homepage : "" %>, "',
 							'"<%= grunt.template.today(\'yyyy\') %> - "',
-							'" Licensed <%= _.pluck(pkg.licenses, \'type\').join(\', \') %> */"\n'
+							'" Licensed <%= _.pluck(pkg.licenses, \'type\').join(\', \') %> */"\\n'
 					].join(',\n'));
 				}
 				else {
 					cfg.version = '0.0.0';
 					cfg.banner = utils.JS([
-						'"/*! ' + library + ' v<%= version %>' + '"\n',
+						'"/*! ' + library + ' v<%= version %>' + '"\\n',
 						'" * © ' + props.author_name + ', ' + props.author_url + ', <%= grunt.template.today(\'yyyy\') %> - ' +
-							'Licensed MIT */"\n'
+							'Licensed MIT */"\\n'
 					].join(',\n'));
 				}
 			}
 			else {
 				cfg.banner = '/*! Author: ' + props.author_name + ', ' + props.author_url + ', ' +
-					"<%= grunt.template.today('yyyy') %> */\n";
+					"<%= grunt.template.today('yyyy') %> */\\n";
 			}
 
 			cfg.jshint = {
@@ -215,8 +215,11 @@ exports.template = function(grunt, init, done) {
 		if (imgo) {
 			cfg.imgo = {
 				images: {
-					src: htdocs_prefix + (images_dir ? images_dir : 'images') + '/*',
-					skip: utils.JS('require("os").platform() == "win32"')
+					src: [
+						htdocs_prefix + (images_dir ? images_dir : 'images') + '/**',  // Design images
+						htdocs_prefix + 'media/**',  // Site media
+						htdocs_prefix + 'build/*.png'  // Generated sprites
+					]
 				}
 			};
 		}
