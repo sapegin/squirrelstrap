@@ -40,7 +40,7 @@ exports.template = function(grunt, init, done) {
 
 	grunt.log.writeln();
 
-	var blockFiles = grunt.file.expandFiles(path.join(folder, '*'));
+	var blockFiles = grunt.file.expand(path.join(folder, '*'));
 
 	var files = {};
 	blockFiles.forEach(function(filepath) {
@@ -56,7 +56,7 @@ exports.template = function(grunt, init, done) {
 	if (stylusIndex) {
 		var importStr = '@import "' + block + '"';
 		if (stylusIndex.indexOf(importStr) === -1) {
-			stylusIndex = stylusIndex.replace(/(@import ['"]shugar['"];?)/, '$1\n' + importStr);
+			stylusIndex = stylusIndex.replace(/(@import ['"]squirrel['"];?)/, '$1\n' + importStr);
 			grunt.file.write('styles/index.styl', stylusIndex);
 			grunt.log.writeln('File "styles/index.styl" updated.');
 		}
@@ -79,7 +79,7 @@ exports.template = function(grunt, init, done) {
 	}
 
 	function printList(root, title) {
-		var dirs = grunt.file.expandDirs(path.join(root, '*'));
+		var dirs = grunt.file.expand({filter: 'isDirectory'}, path.join(root, '*'));
 		var blocks = dirs.map(function(filepath) { return path.basename(filepath); });
 
 		if (!blocks.length) return;
