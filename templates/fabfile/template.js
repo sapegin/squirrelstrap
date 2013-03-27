@@ -17,7 +17,7 @@ exports.template = function(grunt, init, done) {
 		{
 			name: 'server',
 			message: 'Server (~/.ssh/config alias)',
-			'default': 'locum'
+			'default': 'seal'
 		},
 		{
 			name: 'grunt',
