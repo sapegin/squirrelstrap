@@ -31,12 +31,29 @@ hover-underline-color ?= hover-color
 link-underline-position ?= 80%
 link-underline-position = 76.5% if link-style == "underline"
 
+// Pressable links (shifts down by 1px, default: true).
+link-pressable ?= true
+
+// Pressable element: pointer cursor + disable text selection
+.pressable-inset
+	cursor: pointer
+	user-select: none
+
 // Pressable element: shifts down by 1px on click.
 .pressable
+	@extend .pressable-inset
 	&:active
-		position: relative
-		top: 1px
-		cursor: pointer
+		position: relative if link-pressable
+		top: 1px if link-pressable
+
+// Non-pressable element: cancels .pressable.
+.no-pressable
+	&,
+	&:hover,
+	&:active
+		cursor: default
+	&:active
+		position: static if link-pressable
 
 // Remove underline.
 .no-underline
@@ -47,6 +64,7 @@ link-underline-position = 76.5% if link-style == "underline"
 // Link.
 //
 // .link_fake - Pseudo link with dashed underline.
+// .link_quoted - Link in quotes (quotes should be colored but not underlined). Example: a.link.link_quoted>u.
 .link
 	@extend .pressable
 	transition: border .1s ease-in-out, color .2s ease-in-out, background .2s ease-in-out
@@ -102,6 +120,17 @@ link-underline-position = 76.5% if link-style == "underline"
 		&:focus
 			if link-style != "border"
 				background-image: linear-gradient(left, hover-underline-color, hover-underline-color 50%, transparent 50%)
+
+	&_quoted
+		&:link,
+		&:visited,
+		&:hover,
+		&:active,
+		&:focus
+			@extend .no-underline
+
+.link u
+	@extend .link
 
 .no-cssgradients
 	.link
