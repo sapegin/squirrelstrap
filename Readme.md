@@ -1,6 +1,6 @@
 # Squirrelstrap
 
-**This project is obsolette. Now I use Yeoman generators: [generator-tamia](https://github.com/sapegin/generator-tamia).**
+**This project is obsolete. Now I use Yeoman generators: [generator-tamia](https://github.com/sapegin/generator-tamia).**
 
 Set of extremely opinionated [grunt-init](https://github.com/gruntjs/grunt-init) templates for faster front-end web development. You can use them as example or as a base for your own templates.
 
